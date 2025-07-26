@@ -234,5 +234,3 @@ jobs:
       with:
         name: victory-community-flutter
         path: build/app/outputs/flutter-apk/app-release.apk
-
-
