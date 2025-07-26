@@ -1,14 +1,16 @@
 buildscript {
     ext.kotlin_version = '1.9.10'
     ext.android_gradle_plugin_version = '8.1.2'
-    
+
+    // Posisinya di sini, di dalam buildscript
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    // Blok dependencies-nya cukup satu saja
     dependencies {
         classpath "com.android.tools.build:gradle:$android_gradle_plugin_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
-}
-
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }
