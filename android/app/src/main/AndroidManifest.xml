@@ -3,7 +3,6 @@
     android:versionCode="1"
     android:versionName="1.0.0"
     android:compileSdkVersion="34"
-    package="com.victory.community"
     android:installLocation="internalOnly">
 
     <uses-sdk
@@ -39,7 +38,6 @@
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
         android:allowBackup="true"
-        android:extractNativeLibs="true"
         android:hardwareAccelerated="true"
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true">
