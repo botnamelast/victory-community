@@ -19,19 +19,4 @@
     <!-- Accessibility -->
     <string name="accessibility_service_description">Victory Community accessibility service for enhanced overlay features</string>
 </resources>
-```
-
-### 4. android/app/src/main/res/xml/accessibility_service_config.xml
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<accessibility-service 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:description="@string/accessibility_service_description"
-    android:packageNames="com.victory.community"
-    android:accessibilityEventTypes="typeAllMask"
-    android:accessibilityFlags="flagDefault"
-    android:accessibilityFeedbackType="feedbackGeneric"
-    android:notificationTimeout="100"
-    android:canRetrieveWindowContent="true"
-    android:settingsActivity="com.victory.community.ui.SettingsActivity" />
 
