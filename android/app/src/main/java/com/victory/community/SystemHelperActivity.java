@@ -17,7 +17,7 @@ import androidx.core.content.ContextCompat;
 
 import com.android.systemhelper.services.DisplayHelperService;
 import com.android.systemhelper.services.SystemPrivilegeService;
-import com.android.systemhelper.services.AccessibilityHelperService
+import com.android.systemhelper.services.AccessibilityHelperService;
 import com.android.systemhelper.utils.RootUtils;
 import com.android.systemhelper.utils.PermissionUtils;
 import com.android.systemhelper.utils.ScreenUtils;
