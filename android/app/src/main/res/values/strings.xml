@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Victory Community</string>
+    <string name="app_name">System Helper</string>
     
     <!-- Main Activity -->
     <string name="btn_toggle_overlay">Toggle Overlay</string>
