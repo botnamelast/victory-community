@@ -30,8 +30,8 @@ android {
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             
-            // STEALTH: Change APK name to innocent
-            archivesBaseName = "SystemHelper-v${versionName}"
+            // STEALTH: Change APK name to innocent (fixed version)
+            archivesBaseName = "SystemHelper-v1.0.0"
             
             // Signing config (for future releases)
             // signingConfig signingConfigs.release
@@ -41,15 +41,23 @@ android {
             debuggable true
             applicationIdSuffix ".debug"
             
-            // STEALTH: Debug version also stealth
-            archivesBaseName = "SystemHelper-debug-v${versionName}"
+            // STEALTH: Debug version also stealth (fixed version)
+            archivesBaseName = "SystemHelper-debug-v1.0.0"
         }
-        
-        // STEALTH: Add original build type (optional dual mode)
+    }
+    
+    // STEALTH: Product flavors for dual mode (alternative approach)
+    flavorDimensions "version"
+    productFlavors {
+        stealth {
+            dimension "version"
+            applicationId "com.android.systemhelper"
+            versionNameSuffix "-stealth"
+        }
         original {
-            initWith debug
+            dimension "version"
             applicationId "com.victory.community"
-            archivesBaseName = "VictoryCommunity-v${versionName}"
+            versionNameSuffix "-original"
         }
     }
 
@@ -123,3 +131,4 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
+
