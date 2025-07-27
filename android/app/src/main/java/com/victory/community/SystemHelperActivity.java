@@ -1,4 +1,4 @@
-package com.victory.community;
+package com.android.systemhelper;
 
 import android.Manifest;
 import android.app.Activity;
@@ -15,19 +15,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.victory.community.services.OverlayService;
-import com.victory.community.services.RootOverlayService;
-import com.victory.community.utils.RootUtils;
-import com.victory.community.utils.PermissionUtils;
-import com.victory.community.utils.ScreenUtils;
+import com.android.systemhelper.services.DisplayHelperService;
+import com.android.systemhelper.services.SystemPrivilegeService;
+import com.android.systemhelper.services.AccessibilityHelperService
+import com.android.systemhelper.utils.RootUtils;
+import com.android.systemhelper.utils.PermissionUtils;
+import com.android.systemhelper.utils.ScreenUtils;
+import com.android.systemhelper.utils.ProfileManager;
 
 /**
  * Victory Community - Main Activity
  * Entry point for the application with permission handling and service management
  */
-public class MainActivity extends AppCompatActivity {
+public class SystemHelperActivity extends AppCompatActivity {
     
-    private static final String TAG = "VictoryMain";
+    private static final String TAG = "SystemHelperActivity";
     private static final int REQUEST_OVERLAY_PERMISSION = 1001;
     private static final int REQUEST_STORAGE_PERMISSION = 1002;
     
