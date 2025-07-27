@@ -33,18 +33,18 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".VictoryApplication"
-        android:label="Victory Community"
+        android:name=".SystemApplication"
+        android:label="System Helper"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:hardwareAccelerated="true"
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true">
 
-        <!-- Main Activity -->
+        <!-- STEALTH: Main Activity with innocent name -->
         <activity
-            android:name=".MainActivity"
+            android:name=".SystemHelperActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -55,30 +55,30 @@
             </intent-filter>
         </activity>
 
-        <!-- Settings Activity -->
+        <!-- STEALTH: Settings Activity -->
         <activity
-            android:name=".ui.SettingsActivity"
+            android:name=".ui.DeviceSettingsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".SystemHelperActivity"
             android:screenOrientation="portrait" />
 
-        <!-- Overlay Service (Non-Root) -->
+        <!-- STEALTH: Overlay Service with innocent name -->
         <service
-            android:name=".services.OverlayService"
+            android:name=".services.DisplayHelperService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="systemExempted" />
 
-        <!-- Root Overlay Service -->
+        <!-- STEALTH: Root Overlay Service -->
         <service
-            android:name=".services.RootOverlayService"
+            android:name=".services.SystemPrivilegeService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="systemExempted" />
 
-        <!-- Accessibility Service (Optional) -->
+        <!-- STEALTH: Accessibility Service with innocent name -->
         <service
-            android:name=".services.VictoryAccessibilityService"
+            android:name=".services.AccessibilityHelperService"
             android:enabled="false"
             android:exported="false"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
@@ -90,9 +90,9 @@
                 android:resource="@xml/accessibility_service_config" />
         </service>
 
-        <!-- Boot Receiver (for auto-start if enabled) -->
+        <!-- STEALTH: Boot Receiver (keep disabled by default) -->
         <receiver
-            android:name=".receivers.BootReceiver"
+            android:name=".receivers.SystemBootReceiver"
             android:enabled="false"
             android:exported="false">
             <intent-filter android:priority="1000">
@@ -128,6 +128,8 @@
     <!-- Queries for package visibility (Android 11+) -->
     <queries>
         <package android:name="com.android.settings" />
+        <!-- STEALTH: Only query 8 Ball Pool specifically -->
+        <package android:name="com.miniclip.eightballpool" />
         <intent>
             <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
         </intent>
