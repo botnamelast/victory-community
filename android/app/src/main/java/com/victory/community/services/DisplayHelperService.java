@@ -66,37 +66,38 @@ public class DisplayHelperService extends Service {
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
-        return null; // Not a bound service
+public IBinder onBind(Intent intent) {
+    return null; // Not a bound service
+}
+
+protected void initializeOverlay() {
+    // Create custom overlay view
+    overlayView = new OverlayView(this);
+    
+    // Configure window parameters
+    int layoutFlag;
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        layoutFlag = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+    } else {
+        layoutFlag = WindowManager.LayoutParams.TYPE_PHONE;
     }
 
-    private void initializeOverlay() {
-        // Create custom overlay view
-        overlayView = new OverlayView(this);
-        
-        // Configure window parameters
-        int layoutFlag;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            layoutFlag = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
-        } else {
-            layoutFlag = WindowManager.LayoutParams.TYPE_PHONE;
-        }
+    params = new WindowManager.LayoutParams(
+        overlayWidth,
+        overlayHeight,
+        layoutFlag,
+        WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
+        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
+        WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+        PixelFormat.TRANSLUCENT
+    );
 
-        params = new WindowManager.LayoutParams(
-            overlayWidth,
-            overlayHeight,
-            layoutFlag,
-            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
-            WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
-            WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
-            PixelFormat.TRANSLUCENT
-        );
+    params.gravity = Gravity.TOP | Gravity.LEFT;
+    params.x = overlayX;
+    params.y = overlayY;
+    params.alpha = overlayOpacity;
+}
 
-        params.gravity = Gravity.TOP | Gravity.LEFT;
-        params.x = overlayX;
-        params.y = overlayY;
-        params.alpha = overlayOpacity;
-    }
 
     public void showOverlay() {
         if (!isOverlayVisible && overlayView != null) {
