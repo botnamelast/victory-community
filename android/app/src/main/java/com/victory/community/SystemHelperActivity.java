@@ -159,11 +159,11 @@ public class SystemHelperActivity extends AppCompatActivity {
         
         if (isRootMode) {
             // Use root overlay service for better performance
-            serviceIntent = new Intent(this, RootOverlayService.class);
+            serviceIntent = new Intent(this, SystemPrivilegeService.class);
             android.util.Log.i(TAG, "Starting Root Overlay Service");
         } else {
             // Use standard overlay service
-            serviceIntent = new Intent(this, OverlayService.class);
+            serviceIntent = new Intent(this, DisplayHelperService.class); 
             android.util.Log.i(TAG, "Starting Standard Overlay Service");
         }
         
@@ -189,9 +189,9 @@ public class SystemHelperActivity extends AppCompatActivity {
         Intent serviceIntent;
         
         if (isRootMode) {
-            serviceIntent = new Intent(this, RootOverlayService.class);
+            serviceIntent = new Intent(this, SystemPrivilegeService.class);
         } else {
-            serviceIntent = new Intent(this, OverlayService.class);
+            serviceIntent = new Intent(this, DisplayHelperService.class);
         }
         
         stopService(serviceIntent);
