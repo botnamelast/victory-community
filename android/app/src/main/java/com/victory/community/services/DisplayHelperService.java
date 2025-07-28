@@ -295,19 +295,19 @@ public class DisplayHelperService extends Service {
     
     // Public methods for external control
     public static void startOverlay(Context context) {
-        Intent intent = new Intent(context, OverlayService.class);
+        Intent intent = new Intent(context, DisplayHelperService.class);
         intent.setAction("SHOW_OVERLAY");
         context.startService(intent);
     }
     
     public static void stopOverlay(Context context) {
-        Intent intent = new Intent(context, OverlayService.class);
+        Intent intent = new Intent(context, DisplayHelperService.class);
         intent.setAction("HIDE_OVERLAY");
         context.startService(intent);
     }
     
     public static void updateOverlay(Context context, int x, int y, int width, int height, float opacity) {
-        Intent intent = new Intent(context, OverlayService.class);
+        Intent intent = new Intent(context, DisplayHelperService.class);
         intent.setAction("UPDATE_CONFIG");
         intent.putExtra("x", x);
         intent.putExtra("y", y);
