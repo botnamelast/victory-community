@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
  * Enhanced overlay service for rooted devices
  * Provides superior performance and capabilities through root access
  */
-public class SystemPrivilegeService extends OverlayService {
+public class SystemPrivilegeService extends DisplayHelperService {
     private static final String TAG = "SystemPrivilege";
     private boolean isRootAccessVerified = false;
     private Process rootProcess;
