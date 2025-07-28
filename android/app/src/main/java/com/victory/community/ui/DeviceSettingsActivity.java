@@ -11,6 +11,7 @@ import android.widget.*;
 import android.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.List;
+import com.android.systemhelper.utils.ProfileManager;
 
 /**
  * Modern settings activity with real-time preview and profile management
