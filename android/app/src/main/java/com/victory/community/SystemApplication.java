@@ -2,7 +2,7 @@ package com.android.systemhelper;
 
 import android.app.Application;
 
-public class VictoryApplication extends Application {
+public class SystemApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
