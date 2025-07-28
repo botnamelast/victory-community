@@ -400,23 +400,27 @@ public class DeviceSettingsActivity extends Activity {
     private void setupEventListeners() {
         toggleOverlayButton.setOnClickListener(v -> toggleOverlay());
         rootModeButton.setOnClickListener(v -> toggleRootMode());
-        
+
         rootModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             isRootMode = isChecked;
             framebufferSwitch.setEnabled(isChecked);
             systemInjectionSwitch.setEnabled(isChecked);
         });
-        
+
         framebufferSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                DisplayHelperService.enableDirectFramebuffer(this);
+                // Menggunakan SystemPrivilegeService, bukan DisplayHelperService
+                SystemPrivilegeService.enableDirectFramebuffer(this);
             }
+            // Jika perlu, bisa juga handle switch off logic
         });
-        
+
         systemInjectionSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                DisplayHelperService.enableSystemInjection(this);
+                // Menggunakan SystemPrivilegeService, bukan DisplayHelperService
+                SystemPrivilegeService.enableSystemInjection(this);
             }
+            // Jika perlu, bisa juga handle switch off logic
         });
     }
 
@@ -471,7 +475,8 @@ public class DeviceSettingsActivity extends Activity {
     private void toggleOverlay() {
         if (isOverlayActive) {
             if (isRootMode) {
-                stopService(new Intent(this, DisplayHelperService.class));
+                // STOP root mode overlay
+                stopService(new Intent(this, SystemPrivilegeService.class));
             } else {
                 DisplayHelperService.stopOverlay(this);
             }
@@ -480,7 +485,8 @@ public class DeviceSettingsActivity extends Activity {
             isOverlayActive = false;
         } else {
             if (isRootMode) {
-                SystemPrivilegeService.startRootOverlay(this);
+                // START root mode overlay, gunakan method yang benar dan ada
+                SystemPrivilegeService.startPrivilegedService(this);
             } else {
                 DisplayHelperService.startOverlay(this);
             }
