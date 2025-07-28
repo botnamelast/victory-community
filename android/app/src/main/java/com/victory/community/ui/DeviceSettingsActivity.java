@@ -406,13 +406,13 @@ public class DeviceSettingsActivity extends Activity {
         
         framebufferSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                RootOverlayService.enableDirectFramebuffer(this);
+                DisplayHelperService.enableDirectFramebuffer(this);
             }
         });
         
         systemInjectionSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                RootOverlayService.enableSystemInjection(this);
+                DisplayHelperService.enableSystemInjection(this);
             }
         });
     }
@@ -468,18 +468,18 @@ public class DeviceSettingsActivity extends Activity {
     private void toggleOverlay() {
         if (isOverlayActive) {
             if (isRootMode) {
-                stopService(new Intent(this, RootOverlayService.class));
+                stopService(new Intent(this, DisplayHelperService.class));
             } else {
-                OverlayService.stopOverlay(this);
+                DisplayHelperService.stopOverlay(this);
             }
             toggleOverlayButton.setText("Start Overlay");
             toggleOverlayButton.setBackgroundColor(Color.parseColor("#4CAF50"));
             isOverlayActive = false;
         } else {
             if (isRootMode) {
-                RootOverlayService.startRootOverlay(this);
+                DisplayHelperService.startRootOverlay(this);
             } else {
-                OverlayService.startOverlay(this);
+                DisplayHelperService.startOverlay(this);
             }
             toggleOverlayButton.setText("Stop Overlay");
             toggleOverlayButton.setBackgroundColor(Color.parseColor("#F44336"));
@@ -501,7 +501,7 @@ public class DeviceSettingsActivity extends Activity {
             // Update root overlay settings
             // This would require extending RootOverlayService with update methods
         } else {
-            OverlayService.updateOverlay(this, currentX, currentY, 
+            DisplayHelperService.updateOverlay(this, currentX, currentY, 
                 currentSize, currentSize, currentOpacity / 100.0f);
         }
     }
