@@ -21,16 +21,18 @@ import java.io.InputStreamReader;
  * Provides superior performance and capabilities through root access
  */
 public class SystemPrivilegeService extends DisplayHelperService {
+
     private static final String TAG = "SystemPrivilege";
+
     private boolean isRootAccessVerified = false;
     private Process rootProcess;
     private DataOutputStream rootOutputStream;
-    
+
     // Enhanced root-specific features
     private boolean directFramebufferAccess = false;
     private boolean systemLevelInjection = false;
     private int enhancedRefreshRate = 120; // Target 120fps for root mode
-    
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -73,11 +75,9 @@ public class SystemPrivilegeService extends DisplayHelperService {
             Process process = Runtime.getRuntime().exec("su");
             DataOutputStream os = new DataOutputStream(process.getOutputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            
             os.writeBytes("id\n");
             os.writeBytes("exit\n");
             os.flush();
-            
             String response = reader.readLine();
             if (response != null && response.toLowerCase().contains("uid=0")) {
                 isRootAccessVerified = true;
@@ -87,7 +87,6 @@ public class SystemPrivilegeService extends DisplayHelperService {
             } else {
                 Log.w(TAG, "Root access verification failed");
             }
-            
             reader.close();
         } catch (IOException e) {
             Log.e(TAG, "Failed to verify root access", e);
@@ -102,14 +101,11 @@ public class SystemPrivilegeService extends DisplayHelperService {
         try {
             // Set high priority for overlay process
             executeRootCommand("renice -20 " + android.os.Process.myPid());
-            
             // Enable hardware acceleration at system level
             executeRootCommand("setprop debug.hwui.renderer opengl");
             executeRootCommand("setprop debug.egl.hw 1");
-            
             // Optimize memory management
             executeRootCommand("echo 1 > /proc/sys/vm/drop_caches");
-            
             Log.d(TAG, "Root features initialized successfully");
         } catch (Exception e) {
             Log.e(TAG, "Failed to initialize root features", e);
@@ -121,15 +117,12 @@ public class SystemPrivilegeService extends DisplayHelperService {
      */
     private void enableDirectFramebufferAccess() {
         if (!isRootAccessVerified) return;
-        
         try {
             // Grant access to framebuffer device
             executeRootCommand("chmod 666 /dev/graphics/fb0");
             executeRootCommand("chmod 666 /dev/fb0");
-            
             // Set optimal framebuffer settings
             executeRootCommand("echo 0 > /sys/class/graphics/fb0/blank");
-            
             directFramebufferAccess = true;
             Log.d(TAG, "Direct framebuffer access enabled");
         } catch (Exception e) {
@@ -143,16 +136,13 @@ public class SystemPrivilegeService extends DisplayHelperService {
      */
     private void enableSystemLevelInjection() {
         if (!isRootAccessVerified) return;
-        
         try {
             // Modify system properties for enhanced overlay capabilities
             executeRootCommand("setprop persist.vendor.overlay.disable_skip_initramfs false");
             executeRootCommand("setprop ro.surface_composer.max_frame_buffer_acquired_buffers 3");
-            
             // Enable advanced compositor features
             executeRootCommand("setprop debug.sf.enable_hwc_vds 1");
             executeRootCommand("setprop debug.sf.hw 1");
-            
             systemLevelInjection = true;
             Log.d(TAG, "System-level injection enabled");
         } catch (Exception e) {
@@ -166,12 +156,10 @@ public class SystemPrivilegeService extends DisplayHelperService {
      */
     private void setEnhancedRefreshRate(int refreshRate) {
         if (!isRootAccessVerified) return;
-        
         try {
             // Attempt to set higher refresh rate
             executeRootCommand("settings put system peak_refresh_rate " + refreshRate);
             executeRootCommand("settings put system min_refresh_rate " + refreshRate);
-            
             this.enhancedRefreshRate = refreshRate;
             Log.d(TAG, "Enhanced refresh rate set to: " + refreshRate + "Hz");
         } catch (Exception e) {
@@ -193,13 +181,13 @@ public class SystemPrivilegeService extends DisplayHelperService {
 
     /**
      * Create enhanced overlay view with root optimizations
+     * Changed from private to protected so subclasses can override
      */
     @Override
     protected void initializeOverlay() {
         if (isRootAccessVerified) {
             // Create enhanced overlay view
             View overlayView = new EnhancedRootOverlayView(this);
-            
             // Configure enhanced window parameters
             int layoutFlag;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -207,7 +195,6 @@ public class SystemPrivilegeService extends DisplayHelperService {
             } else {
                 layoutFlag = WindowManager.LayoutParams.TYPE_SYSTEM_OVERLAY;
             }
-
             WindowManager.LayoutParams params = new WindowManager.LayoutParams(
                 100, 100,
                 layoutFlag,
@@ -217,19 +204,19 @@ public class SystemPrivilegeService extends DisplayHelperService {
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
                 PixelFormat.TRANSLUCENT
             );
-
             params.gravity = Gravity.TOP | Gravity.LEFT;
             params.alpha = 0.8f;
-            
             // Root-specific enhancements
             if (systemLevelInjection) {
                 params.flags |= WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS;
                 params.flags |= WindowManager.LayoutParams.FLAG_FULLSCREEN;
+                Log.d(TAG, "Enhanced overlay initialized with root optimizations");
+            } else {
+                // Fall back to standard overlay
+                super.initializeOverlay();
             }
-            
-            Log.d(TAG, "Enhanced overlay initialized with root optimizations");
         } else {
-            // Fall back to standard overlay
+            // No root: fallback to base implementation
             super.initializeOverlay();
         }
     }
@@ -247,7 +234,6 @@ public class SystemPrivilegeService extends DisplayHelperService {
         public EnhancedRootOverlayView(Context context) {
             super(context);
             initializeEnhancedPaints();
-            
             // Set hardware acceleration explicitly
             setLayerType(View.LAYER_TYPE_HARDWARE, null);
         }
@@ -259,7 +245,6 @@ public class SystemPrivilegeService extends DisplayHelperService {
             enhancedCrosshairPaint.setStrokeWidth(1.5f);
             enhancedCrosshairPaint.setStyle(Paint.Style.STROKE);
             enhancedCrosshairPaint.setStrokeCap(Paint.Cap.ROUND);
-            
             // Performance indicator paint
             performancePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
             performancePaint.setColor(Color.GREEN);
@@ -270,7 +255,6 @@ public class SystemPrivilegeService extends DisplayHelperService {
         @Override
         protected void onDraw(Canvas canvas) {
             super.onDraw(canvas);
-            
             // Enhanced performance tracking
             long currentTime = System.nanoTime();
             if (lastDrawTime != 0) {
@@ -279,24 +263,23 @@ public class SystemPrivilegeService extends DisplayHelperService {
                 rootFrameCount++;
             }
             lastDrawTime = currentTime;
-            
+
             int width = getWidth();
             int height = getHeight();
             int centerX = width / 2;
             int centerY = height / 2;
-            
+
             // Draw enhanced crosshair
             drawEnhancedCrosshair(canvas, centerX, centerY, width, height);
-            
+
             // Draw performance indicator
             if (rootFrameCount > 60) { // Show after stabilization
                 String perfText = String.format("ROOT: %.1f FPS", rootAvgFps);
                 if (directFramebufferAccess) perfText += " [FB]";
                 if (systemLevelInjection) perfText += " [SI]";
-                
                 canvas.drawText(perfText, 5, 15, performancePaint);
             }
-            
+
             // Trigger redraw at enhanced refresh rate
             if (enhancedRefreshRate > 60) {
                 postInvalidateDelayed(1000 / enhancedRefreshRate);
@@ -307,21 +290,14 @@ public class SystemPrivilegeService extends DisplayHelperService {
 
         private void drawEnhancedCrosshair(Canvas canvas, int centerX, int centerY, int width, int height) {
             int crosshairSize = Math.min(width, height) / 2;
-            
             // Outer crosshair
-            canvas.drawLine(centerX - crosshairSize/2, centerY, 
-                           centerX + crosshairSize/2, centerY, enhancedCrosshairPaint);
-            canvas.drawLine(centerX, centerY - crosshairSize/2, 
-                           centerX, centerY + crosshairSize/2, enhancedCrosshairPaint);
-            
+            canvas.drawLine(centerX - crosshairSize/2, centerY, centerX + crosshairSize/2, centerY, enhancedCrosshairPaint);
+            canvas.drawLine(centerX, centerY - crosshairSize/2, centerX, centerY + crosshairSize/2, enhancedCrosshairPaint);
             // Inner precision crosshair
             int innerSize = crosshairSize / 4;
             enhancedCrosshairPaint.setStrokeWidth(0.8f);
-            canvas.drawLine(centerX - innerSize, centerY, 
-                           centerX + innerSize, centerY, enhancedCrosshairPaint);
-            canvas.drawLine(centerX, centerY - innerSize, 
-                           centerX, centerY + innerSize, enhancedCrosshairPaint);
-            
+            canvas.drawLine(centerX - innerSize, centerY, centerX + innerSize, centerY, enhancedCrosshairPaint);
+            canvas.drawLine(centerX, centerY - innerSize, centerX, centerY + innerSize, enhancedCrosshairPaint);
             // Center dot with enhanced precision
             enhancedCrosshairPaint.setStyle(Paint.Style.FILL);
             canvas.drawCircle(centerX, centerY, 1.5f, enhancedCrosshairPaint);
@@ -350,40 +326,40 @@ public class SystemPrivilegeService extends DisplayHelperService {
     }
 
     // Public methods for root-specific features
-    // Public methods for system-privileged features
-public static void startPrivilegedService(Context context) {
-    Intent intent = new Intent(context, SystemPrivilegeService.class);
-    intent.setAction("SHOW_OVERLAY");
-    context.startService(intent);
-}
 
-public static void enableDirectFramebuffer(Context context) {
-    Intent intent = new Intent(context, SystemPrivilegeService.class);
-    intent.setAction("ENABLE_DIRECT_FRAMEBUFFER");
-    context.startService(intent);
-}
+    public static void startPrivilegedService(Context context) {
+        Intent intent = new Intent(context, SystemPrivilegeService.class);
+        intent.setAction("SHOW_OVERLAY");
+        context.startService(intent);
+    }
 
-public static void enableSystemInjection(Context context) {
-    Intent intent = new Intent(context, SystemPrivilegeService.class);
-    intent.setAction("ENABLE_SYSTEM_INJECTION");
-    context.startService(intent);
-}
+    public static void enableDirectFramebuffer(Context context) {
+        Intent intent = new Intent(context, SystemPrivilegeService.class);
+        intent.setAction("ENABLE_DIRECT_FRAMEBUFFER");
+        context.startService(intent);
+    }
 
-public static void setEnhancedRefreshRate(Context context, int refreshRate) {
-    Intent intent = new Intent(context, SystemPrivilegeService.class);
-    intent.setAction("SET_ENHANCED_REFRESH_RATE");
-    intent.putExtra("refresh_rate", refreshRate);
-    context.startService(intent);
-}
-    
+    public static void enableSystemInjection(Context context) {
+        Intent intent = new Intent(context, SystemPrivilegeService.class);
+        intent.setAction("ENABLE_SYSTEM_INJECTION");
+        context.startService(intent);
+    }
+
+    public static void setEnhancedRefreshRate(Context context, int refreshRate) {
+        Intent intent = new Intent(context, SystemPrivilegeService.class);
+        intent.setAction("SET_ENHANCED_REFRESH_RATE");
+        intent.putExtra("refresh_rate", refreshRate);
+        context.startService(intent);
+    }
+
     public boolean isRootAccessAvailable() {
         return isRootAccessVerified;
     }
-    
+
     public boolean isDirectFramebufferEnabled() {
         return directFramebufferAccess;
     }
-    
+
     public boolean isSystemInjectionEnabled() {
         return systemLevelInjection;
     }
