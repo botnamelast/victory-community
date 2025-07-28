@@ -480,7 +480,7 @@ public class DeviceSettingsActivity extends Activity {
             isOverlayActive = false;
         } else {
             if (isRootMode) {
-                DisplayHelperService.startRootOverlay(this);
+                SystemPrivilegeService.startRootOverlay(this);
             } else {
                 DisplayHelperService.startOverlay(this);
             }
