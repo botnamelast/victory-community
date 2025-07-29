@@ -1,6 +1,6 @@
 # Victory Community - Open Source
 
-Rebuilding the discontinued EasyVictory app as open source community project.
+game mod
 
 ## Features
 - Overlay assistance (no root required)
