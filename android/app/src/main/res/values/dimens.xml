@@ -4,24 +4,20 @@
     <dimen name="header_height">56dp</dimen>
     <dimen name="slide_button_height">48dp</dimen>
     <dimen name="status_card_height">72dp</dimen>
-    <dimen name="footer_height">80dp</dimen>
 
-    <!-- Spacing & Margins -->
-    <dimen name="margin_tiny">4dp</dimen>
+    <!-- Margins -->
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_standard">16dp</dimen>
     <dimen name="margin_large">24dp</dimen>
     <dimen name="margin_extra_large">32dp</dimen>
-    
-    <!-- Padding -->
-    <dimen name="padding_tiny">4dp</dimen>
+
+    <!-- Paddings -->
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_standard">16dp</dimen>
     <dimen name="padding_large">24dp</dimen>
     <dimen name="padding_extra_large">32dp</dimen>
 
-    <!-- Typography -->
-    <dimen name="text_tiny">10sp</dimen>
+    <!-- Text Sizes -->
     <dimen name="text_caption">12sp</dimen>
     <dimen name="text_body">14sp</dimen>
     <dimen name="text_subtitle">16sp</dimen>
@@ -29,7 +25,6 @@
     <dimen name="text_headline">24sp</dimen>
 
     <!-- Icon Sizes -->
-    <dimen name="icon_tiny">12dp</dimen>
     <dimen name="icon_small">16dp</dimen>
     <dimen name="icon_medium">24dp</dimen>
     <dimen name="icon_large">48dp</dimen>
@@ -37,30 +32,50 @@
     <dimen name="button_icon_size">48dp</dimen>
     <dimen name="status_indicator_size">12dp</dimen>
 
-    <!-- Card & Component Styling -->
+    <!-- Card & Elevation -->
     <dimen name="card_corner_radius">8dp</dimen>
-    <dimen name="button_corner_radius">8dp</dimen>
     <dimen name="widget_corner_radius">16dp</dimen>
-    
-    <!-- Elevations -->
     <dimen name="elevation_header">4dp</dimen>
     <dimen name="elevation_card">2dp</dimen>
-    <dimen name="elevation_button">4dp</dimen>
-    <dimen name="elevation_floating_widget">8dp</dimen>
-    
+    <dimen name="elevation_floating_widget">10dp</dimen>
+    <dimen name="elevation_floating_menu">8dp</dimen>
+    <dimen name="elevation_menu_buttons">6dp</dimen>
+
     <!-- Floating Widget Dimensions -->
-    <dimen name="floating_widget_size">64dp</dimen>
-    <dimen name="floating_widget_menu_item">48dp</dimen>
-    <dimen name="floating_menu_radius">120dp</dimen>
+    <dimen name="widget_size_min">24dp</dimen>
+    <dimen name="widget_size_default">64dp</dimen>
+    <dimen name="widget_size_max">128dp</dimen>
+    <dimen name="widget_menu_size">200dp</dimen>
+    <dimen name="widget_button_size">40dp</dimen>
+    <dimen name="widget_drag_threshold">10dp</dimen>
     
-    <!-- Slide Button Specific -->
-    <dimen name="slide_thumb_size">40dp</dimen>
-    <dimen name="slide_track_height">8dp</dimen>
+    <!-- Widget Menu Positions -->
+    <dimen name="menu_button_radius">80dp</dimen>
+    <dimen name="menu_animation_duration">300</dimen>
     
-    <!-- Overlay Dimensions -->
-    <dimen name="trajectory_line_width">4dp</dimen>
-    <dimen name="trajectory_dot_size">16dp</dimen>
-    <dimen name="crosshair_size">64dp</dimen>
-    <dimen name="prediction_zone_size">128dp</dimen>
+    <!-- Touch & Interaction -->
+    <dimen name="touch_target_min">48dp</dimen>
+    <dimen name="ripple_radius">24dp</dimen>
+    <dimen name="drag_sensitivity">5dp</dimen>
+    
+    <!-- Overlay Specific -->
+    <dimen name="overlay_edge_margin">16dp</dimen>
+    <dimen name="overlay_snap_threshold">50dp</dimen>
+    <dimen name="overlay_fade_distance">100dp</dimen>
+    
+    <!-- Status Bar & Navigation -->
+    <dimen name="status_bar_height">24dp</dimen>
+    <dimen name="navigation_bar_height">48dp</dimen>
+    
+    <!-- Animation Durations (in dp for consistent reference) -->
+    <dimen name="anim_duration_short">150</dimen>
+    <dimen name="anim_duration_medium">300</dimen>
+    <dimen name="anim_duration_long">500</dimen>
+    
+    <!-- Physics & Game Related -->
+    <dimen name="trajectory_line_width">2dp</dimen>
+    <dimen name="aim_crosshair_size">32dp</dimen>
+    <dimen name="ball_detection_radius">20dp</dimen>
+    <dimen name="table_calibration_marker">4dp</dimen>
 
 </resources>

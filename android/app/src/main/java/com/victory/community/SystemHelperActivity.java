@@ -1,4 +1,4 @@
-package com.android.systemhelper;
+package com.victory.community;
 
 import android.Manifest;
 import android.app.Activity;
@@ -9,27 +9,29 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.widget.SeekBar;
+import android.widget.Switch;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.android.systemhelper.services.DisplayHelperService;
-import com.android.systemhelper.services.SystemPrivilegeService;
-import com.android.systemhelper.services.AccessibilityHelperService;
-import com.android.systemhelper.utils.RootUtils;
-import com.android.systemhelper.utils.PermissionUtils;
-import com.android.systemhelper.utils.ScreenUtils;
-import com.android.systemhelper.utils.ProfileManager;
+import com.victory.community.services.OverlayService;
+import com.victory.community.services.RootOverlayService;
+import com.victory.community.utils.RootUtils;
+import com.victory.community.utils.PermissionUtils;
+import com.victory.community.utils.ScreenUtils;
 
 /**
- * Victory Community - Main Activity
+ * Victory Community - System Helper Activity
  * Entry point for the application with permission handling and service management
  */
 public class SystemHelperActivity extends AppCompatActivity {
     
-    private static final String TAG = "SystemHelperActivity";
+    private static final String TAG = "VictoryMain";
     private static final int REQUEST_OVERLAY_PERMISSION = 1001;
     private static final int REQUEST_STORAGE_PERMISSION = 1002;
     
@@ -46,6 +48,18 @@ public class SystemHelperActivity extends AppCompatActivity {
     // Native methods (optional, for advanced features)
     public native void initializeNativeCore(String cachePath);
     public native boolean isNativeSupported();
+    
+    // UI Components
+    private SeekBar slideButton;
+    private Switch rootModeSwitch;
+    private TextView systemStatusText;
+    private TextView detectionStatusText;
+    private TextView gameStatusText;
+    private ImageView systemIndicator;
+    private ImageView detectionIndicator;
+    private ImageView gameIndicator;
+    private ImageView rootIndicator;
+    private TextView feedbackLink;
     
     private boolean isRootMode = false;
     private boolean overlayServiceRunning = false;
@@ -159,11 +173,11 @@ public class SystemHelperActivity extends AppCompatActivity {
         
         if (isRootMode) {
             // Use root overlay service for better performance
-            serviceIntent = new Intent(this, SystemPrivilegeService.class);
+            serviceIntent = new Intent(this, RootOverlayService.class);
             android.util.Log.i(TAG, "Starting Root Overlay Service");
         } else {
             // Use standard overlay service
-            serviceIntent = new Intent(this, DisplayHelperService.class); 
+            serviceIntent = new Intent(this, OverlayService.class);
             android.util.Log.i(TAG, "Starting Standard Overlay Service");
         }
         
@@ -189,9 +203,9 @@ public class SystemHelperActivity extends AppCompatActivity {
         Intent serviceIntent;
         
         if (isRootMode) {
-            serviceIntent = new Intent(this, SystemPrivilegeService.class);
+            serviceIntent = new Intent(this, RootOverlayService.class);
         } else {
-            serviceIntent = new Intent(this, DisplayHelperService.class);
+            serviceIntent = new Intent(this, OverlayService.class);
         }
         
         stopService(serviceIntent);
@@ -203,10 +217,82 @@ public class SystemHelperActivity extends AppCompatActivity {
      * Initialize UI components
      */
     private void initializeUI() {
-        // Find views and set listeners
-        findViewById(R.id.btn_toggle_overlay).setOnClickListener(v -> toggleOverlayService());
-        findViewById(R.id.btn_settings).setOnClickListener(v -> openSettings());
-        findViewById(R.id.btn_about).setOnClickListener(v -> showAbout());
+        // Find UI components using correct IDs from activity_main.xml
+        slideButton = findViewById(R.id.slide_button);
+        rootModeSwitch = findViewById(R.id.switch_root_mode);
+        systemStatusText = findViewById(R.id.tv_system_status);
+        detectionStatusText = findViewById(R.id.tv_detection_status);
+        gameStatusText = findViewById(R.id.tv_game_status);
+        systemIndicator = findViewById(R.id.iv_system_indicator);
+        detectionIndicator = findViewById(R.id.iv_detection_indicator);
+        gameIndicator = findViewById(R.id.iv_game_indicator);
+        rootIndicator = findViewById(R.id.iv_root_indicator);
+        feedbackLink = findViewById(R.id.tv_feedback_link);
+        
+        // Set up slide button listener
+        if (slideButton != null) {
+            slideButton.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+                @Override
+                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                    // Handle slide progress
+                }
+                
+                @Override
+                public void onStartTrackingTouch(SeekBar seekBar) {
+                    // Handle slide start
+                }
+                
+                @Override
+                public void onStopTrackingTouch(SeekBar seekBar) {
+                    // Handle slide completion
+                    if (seekBar.getProgress() > 80) {
+                        // Slide to start
+                        toggleOverlayService();
+                        seekBar.setProgress(100);
+                    } else if (seekBar.getProgress() < 20) {
+                        // Slide to stop
+                        if (overlayServiceRunning) {
+                            toggleOverlayService();
+                        }
+                        seekBar.setProgress(0);
+                    } else {
+                        // Return to original position
+                        seekBar.setProgress(overlayServiceRunning ? 100 : 0);
+                    }
+                }
+            });
+        }
+        
+        // Set up root mode switch
+        if (rootModeSwitch != null) {
+            rootModeSwitch.setChecked(isRootMode);
+            rootModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                if (isChecked && !RootUtils.hasRootAccess()) {
+                    Toast.makeText(this, "Root access not available", Toast.LENGTH_SHORT).show();
+                    buttonView.setChecked(false);
+                } else {
+                    isRootMode = isChecked;
+                    if (overlayServiceRunning) {
+                        // Restart service with new mode
+                        stopOverlayService();
+                        initializeOverlayService();
+                    }
+                    updateUI();
+                }
+            });
+        }
+        
+        // Set up feedback link
+        if (feedbackLink != null) {
+            feedbackLink.setOnClickListener(v -> {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://t.me/victory_community"));
+                startActivity(intent);
+            });
+        }
+        
+        // Set up hamburger menu
+        findViewById(R.id.btn_hamburger_menu).setOnClickListener(v -> openSettings());
         
         // Update UI state
         updateUI();
@@ -233,8 +319,14 @@ public class SystemHelperActivity extends AppCompatActivity {
      * Open settings activity
      */
     private void openSettings() {
-        Intent intent = new Intent(this, SettingsActivity.class);
-        startActivity(intent);
+        // For now, show a simple dialog
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("Settings")
+                .setMessage("Settings panel coming soon!\n\nCurrent Status:\n" +
+                          "- Mode: " + (isRootMode ? "Root" : "Standard") + "\n" +
+                          "- Overlay: " + (overlayServiceRunning ? "Running" : "Stopped"))
+                .setPositiveButton("OK", null)
+                .show();
     }
     
     /**
@@ -252,18 +344,42 @@ public class SystemHelperActivity extends AppCompatActivity {
      * Update UI based on current state
      */
     private void updateUI() {
-        // Update toggle button text
-        android.widget.Button toggleBtn = findViewById(R.id.btn_toggle_overlay);
-        if (toggleBtn != null) {
-            toggleBtn.setText(overlayServiceRunning ? "Stop Overlay" : "Start Overlay");
+        // Update slide button position
+        if (slideButton != null) {
+            slideButton.setProgress(overlayServiceRunning ? 100 : 0);
         }
         
-        // Update status text
-        android.widget.TextView statusText = findViewById(R.id.tv_status);
-        if (statusText != null) {
-            String status = "Mode: " + (isRootMode ? "Root" : "Standard") + "\n";
-            status += "Overlay: " + (overlayServiceRunning ? "Running" : "Stopped");
-            statusText.setText(status);
+        // Update root indicator visibility
+        if (rootIndicator != null) {
+            rootIndicator.setVisibility(isRootMode ? android.view.View.VISIBLE : android.view.View.GONE);
+        }
+        
+        // Update status texts
+        if (systemStatusText != null) {
+            systemStatusText.setText(overlayServiceRunning ? "System Active" : "System Ready");
+        }
+        
+        if (detectionStatusText != null) {
+            detectionStatusText.setText("Detection Ready");
+        }
+        
+        if (gameStatusText != null) {
+            gameStatusText.setText("Waiting for 8 Ball Pool");
+        }
+        
+        // Update status indicators
+        updateStatusIndicator(systemIndicator, overlayServiceRunning);
+        updateStatusIndicator(detectionIndicator, true);
+        updateStatusIndicator(gameIndicator, false);
+    }
+    
+    /**
+     * Update status indicator color
+     */
+    private void updateStatusIndicator(ImageView indicator, boolean active) {
+        if (indicator != null) {
+            int colorRes = active ? R.color.status_active : R.color.status_inactive;
+            indicator.setColorFilter(ContextCompat.getColor(this, colorRes));
         }
     }
     
@@ -315,4 +431,3 @@ public class SystemHelperActivity extends AppCompatActivity {
         updateUI();
     }
 }
-

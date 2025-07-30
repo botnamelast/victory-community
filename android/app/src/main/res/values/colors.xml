@@ -1,70 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Colors (System Blue Theme) -->
+    <!-- Victory Community Dark Theme Colors -->
+    
+    <!-- Primary Colors -->
     <color name="primary">#2196F3</color>
     <color name="primary_dark">#1976D2</color>
-    <color name="primary_variant">#1565C0</color>
+    <color name="primary_light">#64B5F6</color>
+    
+    <!-- Accent Colors -->
     <color name="accent_primary">#03DAC6</color>
     <color name="accent_secondary">#018786</color>
     
-    <!-- Background Colors (Dark Stealth Theme) -->
+    <!-- Background Colors -->
     <color name="background_primary">#1E1E1E</color>
     <color name="background_secondary">#121212</color>
     <color name="surface_primary">#2E2E2E</color>
-    <color name="surface_secondary">#373737</color>
-    <color name="surface_elevated">#424242</color>
+    <color name="surface_secondary">#3E3E3E</color>
     
-    <!-- Text Colors (High Contrast) -->
+    <!-- Text Colors -->
     <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#CCCCCC</color>
-    <color name="text_tertiary">#999999</color>
-    <color name="text_headline">#F5F5F5</color>
-    <color name="text_caption">#B0B0B0</color>
-    <color name="text_disabled">#666666</color>
+    <color name="text_secondary">#B3B3B3</color>
+    <color name="text_tertiary">#888888</color>
+    <color name="text_disabled">#555555</color>
+    
+    <!-- Extended Icon Colors -->
+    <color name="icon_on_primary">#FFFFFF</color>
+    <color name="icon_on_secondary">#000000</color>
+    <color name="icon_on_surface">#FFFFFF</color>
+    <color name="icon_on_background">#FFFFFF</color>
+    <color name="icon_disabled">#666666</color>
+    <color name="icon_selected">#03DAC6</color>
+    
+    <!-- Scrim & Shadow Colors -->
+    <color name="scrim">#80000000</color>
+    <color name="shadow_light">#1A000000</color>
+    <color name="shadow_medium">#33000000</color>
+    <color name="shadow_dark">#4D000000</color>
+    
+    <!-- Additional Theme Colors -->
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_secondary">#000000</color>
+    <color name="on_surface">#FFFFFF</color>
+    <color name="on_background">#FFFFFF</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="inverse_surface">#FFFFFF</color>
+    <color name="inverse_on_surface">#000000</color>
+    <color name="inverse_primary">#1976D2</color>
+    
+    <!-- Icon Colors -->
+    <color name="icon_primary">#FFFFFF</color>
+    <color name="icon_secondary">#B3B3B3</color>
+    <color name="icon_accent">#03DAC6</color>
     
     <!-- Status Colors -->
     <color name="status_active">#4CAF50</color>
-    <color name="status_inactive">#757575</color>
-    <color name="status_ready">#FF9800</color>
-    <color name="status_warning">#FFC107</color>
+    <color name="status_ready">#03DAC6</color>
+    <color name="status_warning">#FF9800</color>
     <color name="status_error">#F44336</color>
-    <color name="status_success">#4CAF50</color>
+    <color name="status_inactive">#666666</color>
     
-    <!-- Gaming Colors -->
-    <color name="game_detected">#4CAF50</color>
-    <color name="game_not_detected">#757575</color>
-    <color name="root_available">#FFD700</color>
-    <color name="root_unavailable">#666666</color>
-    
-    <!-- Interactive Colors -->
-    <color name="button_background">#2196F3</color>
-    <color name="button_background_disabled">#424242</color>
-    <color name="button_text">#FFFFFF</color>
-    <color name="button_text_disabled">#999999</color>
+    <!-- Button Colors -->
+    <color name="button_primary">#2196F3</color>
+    <color name="button_secondary">#2E2E2E</color>
+    <color name="button_danger">#F44336</color>
+    <color name="button_success">#4CAF50</color>
     
     <!-- Overlay Colors -->
-    <color name="overlay_background">#80000000</color>
-    <color name="floating_widget_idle">#99000000</color>
-    <color name="floating_widget_active">#CC2196F3</color>
-    <color name="trajectory_line">#FFFF00</color>
-    <color name="trajectory_dot">#FF8800</color>
-    <color name="aim_crosshair">#00FF00</color>
-    <color name="prediction_safe">#4D4CAF50</color>
-    <color name="prediction_risky">#66F44336</color>
+    <color name="overlay_background">#CC000000</color>
+    <color name="overlay_surface">#DD2E2E2E</color>
+    <color name="widget_background">#FF2E2E2E</color>
+    <color name="widget_shadow">#33000000</color>
     
-    <!-- Card & Component Colors -->
+    <!-- Gradient Colors -->
+    <color name="gradient_start">#2196F3</color>
+    <color name="gradient_end">#03DAC6</color>
+    
+    <!-- Game Feature Colors -->
+    <color name="trajectory_line">#FF2196F3</color>
+    <color name="aim_crosshair">#FFFF5722</color>
+    <color name="ball_detected">#FF4CAF50</color>
+    <color name="table_marker">#FFFF9800</color>
+    
+    <!-- Card Colors -->
     <color name="card_background">#2E2E2E</color>
-    <color name="card_stroke">#424242</color>
-    <color name="divider">#373737</color>
-    <color name="ripple">#33FFFFFF</color>
+    <color name="card_surface">#3E3E3E</color>
+    <color name="card_border">#555555</color>
+    <color name="card_shadow">#1A000000</color>
     
-    <!-- Telegram & Social -->
-    <color name="telegram_blue">#0088CC</color>
-    <color name="link_color">#64B5F6</color>
+    <!-- Extended Background Colors -->
+    <color name="background_surface">#2E2E2E</color>
+    <color name="background_variant">#3E3E3E</color>
+    <color name="background_elevated">#404040</color>
+    <color name="background_dialog">#2E2E2E</color>
+    <color name="background_overlay">#CC000000</color>
+    <color name="background_transparent">#00000000</color>
+    
+    <!-- Extended Surface Colors -->
+    <color name="surface_variant">#404040</color>
+    <color name="surface_elevated">#4E4E4E</color>
+    <color name="surface_container">#353535</color>
+    <color name="surface_container_high">#454545</color>
+    <color name="surface_container_highest">#555555</color>
+    <color name="surface_dim">#1A1A1A</color>
+    <color name="surface_bright">#4E4E4E</color>
+    
+    <!-- Border & Divider Colors -->
+    <color name="border_primary">#555555</color>
+    <color name="border_secondary">#3E3E3E</color>
+    <color name="divider">#2E2E2E</color>
+    <color name="divider_light">#404040</color>
+    <color name="outline">#666666</color>
+    <color name="outline_variant">#4E4E4E</color>
+    
+    <!-- State Colors -->
+    <color name="state_disabled">#555555</color>
+    <color name="state_pressed">#1A2196F3</color>
+    <color name="state_focused">#332196F3</color>
+    <color name="state_selected">#2196F3</color>
+    <color name="state_hover">#1A03DAC6</color>
+    
+    <!-- Extended Icon Colors -->
+    <color name="text_headline">#FFFFFF</color>
+    <color name="text_display">#FFFFFF</color>
+    <color name="text_body_large">#E0E0E0</color>
+    <color name="text_body_medium">#CCCCCC</color>
+    <color name="text_body_small">#B3B3B3</color>
+    <color name="text_label_large">#FFFFFF</color>
+    <color name="text_label_medium">#CCCCCC</color>
+    <color name="text_label_small">#999999</color>
+    
+    <!-- Material Design Colors (for compatibility) -->
+    <color name="material_blue_500">#2196F3</color>
+    <color name="material_blue_700">#1976D2</color>
+    <color name="material_cyan_500">#00BCD4</color>
+    <color name="material_green_500">#4CAF50</color>
+    <color name="material_orange_500">#FF9800</color>
+    <color name="material_red_500">#F44336</color>
     
     <!-- Transparency Levels -->
     <color name="transparent">#00000000</color>
     <color name="semi_transparent">#80000000</color>
-    <color name="light_transparent">#33000000</color>
+    <color name="mostly_transparent">#20000000</color>
+    
+    <!-- Widget State Colors -->
+    <color name="widget_idle">#FF2E2E2E</color>
+    <color name="widget_active">#FF2196F3</color>
+    <color name="widget_dragging">#FF03DAC6</color>
+    <color name="widget_hover">#FF1976D2</color>
+    
+    <!-- Menu Colors -->
+    <color name="menu_background">#EE2E2E2E</color>
+    <color name="menu_item_normal">#FFFFFF</color>
+    <color name="menu_item_selected">#03DAC6</color>
+    <color name="menu_divider">#555555</color>
+    
+    <!-- Notification Colors -->
+    <color name="notification_background">#2E2E2E</color>
+    <color name="notification_text">#FFFFFF</color>
+    <color name="notification_accent">#2196F3</color>
     
 </resources>
