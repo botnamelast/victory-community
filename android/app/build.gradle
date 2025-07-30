@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace 'com.android.systemhelper'
     compileSdk 34
 
     defaultConfig {
