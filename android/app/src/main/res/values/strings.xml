@@ -26,7 +26,7 @@
     <!-- Quick Settings -->
     <string name="quick_settings_title">Quick Settings</string>
     <string name="root_mode_title">Root Mode</string>
-    <string name="root_mode_description">Enhanced performance mode</string>
+    <string name="superuser_mode_description">Enhanced performance mode</string>
     
     <!-- Footer -->
     <string name="version_info">Version 1.0.0</string>
