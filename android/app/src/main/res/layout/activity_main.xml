@@ -1,455 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/tools/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_primary"
-    android:fitsSystemWindows="true">
+    android:padding="20dp"
+    android:background="#1E1E1E">
 
-    <!-- Header Section dengan Hamburger Menu -->
-    <LinearLayout
+    <!-- Header -->
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height"
-        android:orientation="horizontal"
-        android:background="@color/surface_primary"
-        android:paddingHorizontal="@dimen/margin_standard"
-        android:gravity="center_vertical"
-        android:elevation="@dimen/elevation_header">
-
-        <!-- Hamburger Menu Button (acts as settings) -->
-        <ImageButton
-            android:id="@+id/btn_settings"
-            android:layout_width="@dimen/button_icon_size"
-            android:layout_height="@dimen/button_icon_size"
-            android:src="@drawable/ic_hamburger"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/menu_description"
-            android:tint="@color/text_primary"
-            android:padding="@dimen/padding_small" />
-
-        <!-- Title -->
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/app_name"
-            android:textSize="@dimen/text_title"
-            android:textColor="@color/text_primary"
-            android:textStyle="bold"
-            android:layout_marginStart="@dimen/margin_standard"
-            android:gravity="start|center_vertical" />
-
-        <!-- Root Mode Indicator -->
-        <ImageView
-            android:id="@+id/iv_root_indicator"
-            android:layout_width="@dimen/icon_small"
-            android:layout_height="@dimen/icon_small"
-                                        android:src="@drawable/ic_root"
-            android:contentDescription="@string/root_mode_description"
-            android:visibility="gone"
-            tools:visibility="visible" />
-
-    </LinearLayout>
-
-    <!-- Main Content Container -->
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:fillViewport="true">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/margin_standard">
-
-            <!-- Slide Button Section -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/margin_large"
-                app:cardBackgroundColor="@color/surface_primary"
-                app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="@dimen/elevation_card">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding_large">
-
-                    <!-- 8 Ball Icon -->
-                    <ImageView
-                        android:layout_width="@dimen/icon_large"
-                        android:layout_height="@dimen/icon_large"
-                        android:src="@drawable/ic_8ball"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="@dimen/margin_standard"
-                        android:contentDescription="@string/eight_ball_description" />
-
-                    <!-- Slide Button Container -->
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/slide_button_height"
-                        android:layout_marginVertical="@dimen/margin_standard">
-
-                        <!-- Background Track -->
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_8ball"
-                            android:scaleType="fitXY"
-                            android:contentDescription="@string/slide_track_description" />
-
-                        <!-- Custom Slide Button (acts as toggle overlay) -->
-                        <SeekBar
-                            android:id="@+id/btn_toggle_overlay"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:max="100"
-                            android:progress="0"
-                            android:thumb="@drawable/ic_8ball"
-                            android:progressDrawable="@android:color/transparent"
-                            android:background="@android:color/transparent"
-                            android:splitTrack="false" />
-
-                    </FrameLayout>
-
-                    <!-- Slide Button Labels -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/start_helper"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="@dimen/text_caption"
-                            android:gravity="start" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="@string/stop_helper"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="@dimen/text_caption"
-                            android:gravity="end" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- Status Cards Section -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginVertical="@dimen/margin_standard">
-
-                <!-- System Status Card -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_small"
-                    app:cardBackgroundColor="@color/surface_primary"
-                    app:cardCornerRadius="@dimen/card_corner_radius"
-                    app:cardElevation="@dimen/elevation_card">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/status_card_height"
-                        android:orientation="horizontal"
-                        android:background="@color/surface_primary"
-                        android:paddingHorizontal="@dimen/padding_standard"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:id="@+id/iv_system_status"
-                            android:layout_width="@dimen/icon_medium"
-                            android:layout_height="@dimen/icon_medium"
-                            android:src="@drawable/ic_system"
-                            android:tint="@color/text_primary"
-                            android:contentDescription="@string/system_status_description" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_marginStart="@dimen/margin_standard">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/system_status_title"
-                                android:textColor="@color/text_primary"
-                                android:textSize="@dimen/text_body"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_status"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/waiting_for_game"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="@dimen/text_caption" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:id="@+id/iv_system_indicator"
-                            android:layout_width="@dimen/status_indicator_size"
-                            android:layout_height="@dimen/status_indicator_size"
-                            android:src="@drawable/status_indicator"
-                            android:tint="@color/status_inactive" />
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <!-- Detection Status Card -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_small"
-                    app:cardBackgroundColor="@color/surface_primary"
-                    app:cardCornerRadius="@dimen/card_corner_radius"
-                    app:cardElevation="@dimen/elevation_card">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/status_card_height"
-                        android:orientation="horizontal"
-                        android:background="@color/surface_primary"
-                        android:paddingHorizontal="@dimen/padding_standard"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:id="@+id/iv_detection_status"
-                            android:layout_width="@dimen/icon_medium"
-                            android:layout_height="@dimen/icon_medium"
-                            android:src="@drawable/ic_detection"
-                            android:tint="@color/text_primary"
-                            android:contentDescription="@string/detection_status_description" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_marginStart="@dimen/margin_standard">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/detection_status_title"
-                                android:textColor="@color/text_primary"
-                                android:textSize="@dimen/text_body"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_detection_status"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/detection_ready"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="@dimen/text_caption" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:id="@+id/iv_detection_indicator"
-                            android:layout_width="@dimen/status_indicator_size"
-                            android:layout_height="@dimen/status_indicator_size"
-                            android:src="@drawable/status_indicator"
-                            android:tint="@color/status_ready" />
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-                <!-- Game Status Card -->
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@color/surface_primary"
-                    app:cardCornerRadius="@dimen/card_corner_radius"
-                    app:cardElevation="@dimen/elevation_card">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/status_card_height"
-                        android:orientation="horizontal"
-                        android:background="@color/surface_primary"
-                        android:paddingHorizontal="@dimen/padding_standard"
-                        android:gravity="center_vertical">
-
-                        <ImageView
-                            android:id="@+id/iv_game_status"
-                            android:layout_width="@dimen/icon_medium"
-                            android:layout_height="@dimen/icon_medium"
-                            android:src="@drawable/ic_8ball"
-                            android:tint="@color/text_primary"
-                            android:contentDescription="@string/game_status_description" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_marginStart="@dimen/margin_standard">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/game_status_title"
-                                android:textColor="@color/text_primary"
-                                android:textSize="@dimen/text_body"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/tv_game_status"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/game_not_detected"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="@dimen/text_caption" />
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:id="@+id/iv_game_indicator"
-                            android:layout_width="@dimen/status_indicator_size"
-                            android:layout_height="@dimen/status_indicator_size"
-                            android:src="@drawable/status_indicator"
-                            android:tint="@color/status_inactive" />
-
-                    </LinearLayout>
-
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <!-- Quick Settings Section -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="@dimen/margin_standard"
-                app:cardBackgroundColor="@color/surface_primary"
-                app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="@dimen/elevation_card">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding_large">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/quick_settings_title"
-                        android:textColor="@color/text_primary"
-                        android:textSize="@dimen/text_subtitle"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="@dimen/margin_standard" />
-
-                    <!-- Root Mode Toggle -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:paddingVertical="@dimen/padding_small">
-
-                        <ImageView
-                            android:layout_width="@dimen/icon_medium"
-                            android:layout_height="@dimen/icon_medium"
-                            android:src="@drawable/ic_root"
-                            android:tint="@color/accent_primary"
-                            android:contentDescription="@string/root_mode_description" />
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:layout_marginStart="@dimen/margin_standard">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/root_mode_title"
-                                android:textColor="@color/text_primary"
-                                android:textSize="@dimen/text_body" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/root_mode_description"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="@dimen/text_caption" />
-
-                        </LinearLayout>
-
-                        <Switch
-                            android:id="@+id/switch_root_mode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:thumb="@drawable/ic_8ball"
-                            android:track="@android:color/darker_gray" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-    <!-- Footer Section -->
+        android:layout_height="wrap_content"
+        android:text="System Helper"
+        android:textSize="24sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="30dp" />
+
+    <!-- Status Display -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/surface_primary"
-        android:paddingHorizontal="@dimen/margin_standard"
-        android:paddingVertical="@dimen/padding_standard"
-        android:elevation="@dimen/elevation_header">
+        android:background="#2E2E2E"
+        android:padding="20dp"
+        android:layout_marginBottom="20dp">
 
-        <!-- Version Info -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/version_info"
-            android:textColor="@color/text_secondary"
-            android:textSize="@dimen/text_caption"
-            android:layout_gravity="center" />
+            android:text="Status"
+            android:textColor="#4CAF50"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp" />
 
-        <!-- Feedback Link (acts as about button) -->
         <TextView
-            android:id="@+id/btn_about"
+            android:id="@+id/tv_system_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/feedback_link"
-            android:textColor="@color/accent_primary"
-            android:textSize="@dimen/text_caption"
-            android:layout_gravity="center"
-            android:padding="@dimen/padding_small"
-            android:background="?attr/selectableItemBackground"
-            android:layout_marginTop="@dimen/margin_small" />
+            android:text="System Helper Ready"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:id="@+id/tv_detection_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Detection: Ready"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:id="@+id/tv_game_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Game: Not detected"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
 
     </LinearLayout>
+
+    <!-- Control Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#2E2E2E"
+        android:padding="20dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Control"
+            android:textColor="#4CAF50"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="15dp" />
+
+        <!-- Main Toggle Button -->
+        <Button
+            android:id="@+id/btn_toggle_helper"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Start System Helper"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:background="#4CAF50"
+            android:layout_marginBottom="15dp" />
+
+        <!-- Root Mode Toggle -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Root Mode"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp" />
+
+            <Switch
+                android:id="@+id/switch_root_mode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Settings Button -->
+    <Button
+        android:id="@+id/btn_settings"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Settings"
+        android:textColor="#FFFFFF"
+        android:background="#2196F3"
+        android:layout_marginBottom="10dp" />
+
+    <!-- About Button -->
+    <Button
+        android:id="@+id/btn_about"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="About"
+        android:textColor="#FFFFFF"
+        android:background="#607D8B" />
+
+    <!-- Footer -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Version 1.0.0"
+        android:textColor="#888888"
+        android:textSize="12sp"
+        android:gravity="center|bottom"
+        android:layout_marginTop="20dp" />
 
 </LinearLayout>
