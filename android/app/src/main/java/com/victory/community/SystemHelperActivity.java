@@ -159,15 +159,15 @@ public class SystemHelperActivity extends AppCompatActivity {
     }
     
     /**
-     * Setup all event listeners
+     * Setup all event listeners - with null checks
      */
     private void setupEventListeners() {
-        // Hamburger menu
+        // Hamburger menu - only if exists
         if (btnHamburgerMenu != null) {
             btnHamburgerMenu.setOnClickListener(v -> openSettings());
         }
         
-        // Main slide button
+        // Main slide button - only if exists
         if (slideButton != null) {
             slideButton.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
@@ -200,7 +200,7 @@ public class SystemHelperActivity extends AppCompatActivity {
             });
         }
         
-        // Root mode switch
+        // Root mode switch - only if exists
         if (switchRootMode != null) {
             switchRootMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 if (isChecked && !isRootMode) {
@@ -213,7 +213,7 @@ public class SystemHelperActivity extends AppCompatActivity {
             });
         }
         
-        // Feedback link
+        // Feedback link - only if exists
         if (tvFeedbackLink != null) {
             tvFeedbackLink.setOnClickListener(v -> openFeedback());
         }
