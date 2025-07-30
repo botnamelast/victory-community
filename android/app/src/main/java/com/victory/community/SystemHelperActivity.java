@@ -9,12 +9,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -37,7 +39,7 @@ public class SystemHelperActivity extends AppCompatActivity {
     private static final int REQUEST_OVERLAY_PERMISSION = 1001;
     private static final int REQUEST_STORAGE_PERMISSION = 1002;
     
-    // UI Components - updated for simple layout
+    // UI Components - supports both simple and complex layouts
     private Button btnToggleHelper;
     private Button btnSettings;
     private Button btnAbout;
@@ -381,6 +383,17 @@ public class SystemHelperActivity extends AppCompatActivity {
     }
     
     /**
+     * Show about dialog
+     */
+    private void showAbout() {
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle("System Helper")
+                .setMessage("Open source system helper app\n\nVersion: 1.0.0\nMode: " + (isRootMode ? "Root" : "Standard"))
+                .setPositiveButton("OK", null)
+                .show();
+    }
+    
+    /**
      * Update UI based on current state - supports both layouts
      */
     private void updateUI() {
@@ -417,43 +430,31 @@ public class SystemHelperActivity extends AppCompatActivity {
         }
         
         // Update status indicators (complex layout only)
-        int activeColor = ContextCompat.getColor(this, android.R.color.holo_green_light);
-        int inactiveColor = ContextCompat.getColor(this, android.R.color.darker_gray);
-        int readyColor = ContextCompat.getColor(this, android.R.color.holo_blue_light);
-        
-        if (ivSystemIndicator != null) {
-            ivSystemIndicator.setColorFilter(systemHelperActive ? activeColor : inactiveColor);
-        }
-        
-        if (ivDetectionIndicator != null) {
-            ivDetectionIndicator.setColorFilter(PermissionUtils.hasOverlayPermission(this) ? 
-                readyColor : inactiveColor);
-        }
-        
-        if (ivGameIndicator != null) {
-            ivGameIndicator.setColorFilter(systemHelperActive ? activeColor : inactiveColor);
-        }
-        
-        // Update root indicator
-        if (ivRootIndicator != null) {
-            boolean hasRoot = RootUtils.isDeviceRooted() && RootUtils.hasRootAccess();
-            ivRootIndicator.setVisibility(hasRoot ? android.view.View.VISIBLE : android.view.View.GONE);
-        }
-    }_green_light);
-        int inactiveColor = ContextCompat.getColor(this, android.R.color.darker_gray);
-        int readyColor = ContextCompat.getColor(this, android.R.color.holo_blue_light);
-        
-        if (ivSystemIndicator != null) {
-            ivSystemIndicator.setColorFilter(systemHelperActive ? activeColor : inactiveColor);
-        }
-        
-        if (ivDetectionIndicator != null) {
-            ivDetectionIndicator.setColorFilter(PermissionUtils.hasOverlayPermission(this) ? 
-                readyColor : inactiveColor);
-        }
-        
-        if (ivGameIndicator != null) {
-            ivGameIndicator.setColorFilter(systemHelperActive ? activeColor : inactiveColor);
+        try {
+            int activeColor = ContextCompat.getColor(this, android.R.color.holo_green_light);
+            int inactiveColor = ContextCompat.getColor(this, android.R.color.darker_gray);
+            int readyColor = ContextCompat.getColor(this, android.R.color.holo_blue_light);
+            
+            if (ivSystemIndicator != null) {
+                ivSystemIndicator.setColorFilter(systemHelperActive ? activeColor : inactiveColor);
+            }
+            
+            if (ivDetectionIndicator != null) {
+                ivDetectionIndicator.setColorFilter(PermissionUtils.hasOverlayPermission(this) ? 
+                    readyColor : inactiveColor);
+            }
+            
+            if (ivGameIndicator != null) {
+                ivGameIndicator.setColorFilter(systemHelperActive ? activeColor : inactiveColor);
+            }
+            
+            // Update root indicator
+            if (ivRootIndicator != null) {
+                boolean hasRoot = RootUtils.isDeviceRooted() && RootUtils.hasRootAccess();
+                ivRootIndicator.setVisibility(hasRoot ? android.view.View.VISIBLE : android.view.View.GONE);
+            }
+        } catch (Exception e) {
+            Log.w(TAG, "Error updating UI indicators", e);
         }
     }
     
