@@ -1,13 +1,11 @@
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="12dp"
-    android:height="12dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
-    <path
-        android:fillColor="#69F0AE"
-        android:pathData="M12,12m-12,0a12,12 0,1 1,24 0a12,12 0,1 1,-24 0"
-        android:alpha="0.4"/>
-    <path
-        android:fillColor="#69F0AE"
-        android:pathData="M12,12m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0"/>
-</vector>
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    
+    <solid android:color="@color/status_ready" />
+    
+    <size
+        android:width="@dimen/status_indicator_size"
+        android:height="@dimen/status_indicator_size" />
+        
+</shape>
