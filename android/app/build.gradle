@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.android.systemhelper'
+    namespace 'com.victory.community'
     compileSdk 34
 
     defaultConfig {
