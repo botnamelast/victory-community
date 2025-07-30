@@ -1,7 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <!-- Original Material Colors (keep for compatibility) -->
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
     <color name="colorAccent">#03DAC5</color>
-
-    <color name="background_primary">#F5F5F5</color> <color name="surface_primary">#FFFFFF</color>    <color name="text_primary">#212121</color>       <color name="text_secondary">#757575</color>     <color name="text_headline">#333333</color>      <color name="text_caption">#9E9E9E</color>       <color name="status_inactive">#BDBDBD</color>    <color name="status_ready">#4CAF50</color>       <color name="accent_primary">#007BFF</color>     <color name="button_background">#007BFF</color>  </resources>
+    
+    <!-- NEW: Victory Community Stealth Theme Colors -->
+    
+    <!-- Primary Colors (System Blue Theme) -->
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#1976D2</color>
+    <color name="primary_variant">#1565C0</color>
+    <color name="accent_primary">#03DAC6</color>
+    <color name="accent_secondary">#018786</color>
+    
+    <!-- Background Colors (Dark Stealth Theme) -->
+    <color name="background_primary">#1E1E1E</color>
+    <color name="background_secondary">#121212</color>
+    <color name="surface_primary">#2E2E2E</color>
+    <color name="surface_secondary">#373737</color>
+    <color name="surface_elevated">#424242</color>
+    
+    <!-- Text Colors (High Contrast) -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#CCCCCC</color>
+    <color name="text_tertiary">#999999</color>
+    <color name="text_headline">#F5F5F5</color>
+    <color name="text_caption">#B0B0B0</color>
+    <color name="text_disabled">#666666</color>
+    
+    <!-- Status Colors -->
+    <color name="status_active">#4CAF50</color>
+    <color name="status_inactive">#757575</color>
+    <color name="status_ready">#FF9800</color>
+    <color name="status_warning">#FFC107</color>
+    <color name="status_error">#F44336</color>
+    <color name="status_success">#4CAF50</color>
+    
+    <!-- Gaming Colors -->
+    <color name="game_detected">#4CAF50</color>
+    <color name="game_not_detected">#757575</color>
+    <color name="root_available">#FFD700</color>
+    <color name="root_unavailable">#666666</color>
+    
+    <!-- Interactive Colors -->
+    <color name="button_background">#2196F3</color>
+    <color name="button_background_disabled">#424242</color>
+    <color name="button_text">#FFFFFF</color>
+    <color name="button_text_disabled">#999999</color>
+    
+    <!-- Overlay Colors -->
+    <color name="overlay_background">#80000000</color>
+    <color name="floating_widget_idle">#99000000</color>
+    <color name="floating_widget_active">#CC2196F3</color>
+    <color name="trajectory_line">#FFFF00</color>
+    <color name="trajectory_dot">#FF8800</color>
+    <color name="aim_crosshair">#00FF00</color>
+    <color name="prediction_safe">#4D4CAF50</color>
+    <color name="prediction_risky">#66F44336</color>
+    
+    <!-- Card & Component Colors -->
+    <color name="card_background">#2E2E2E</color>
+    <color name="card_stroke">#424242</color>
+    <color name="divider">#373737</color>
+    <color name="ripple">#33FFFFFF</color>
+    
+    <!-- Telegram & Social -->
+    <color name="telegram_blue">#0088CC</color>
+    <color name="link_color">#64B5F6</color>
+    
+    <!-- Transparency Levels -->
+    <color name="transparent">#00000000</color>
+    <color name="semi_transparent">#80000000</color>
+    <color name="light_transparent">#33000000</color>
+    
+</resources>

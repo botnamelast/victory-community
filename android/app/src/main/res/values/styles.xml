@@ -1,18 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="android:selectableItemBackgroundBorderless">?attr/selectableItemBackgroundBorderless</item>
-        <item name="selectableItemBackground">?attr/selectableItemBackground</item>
+    <!-- Main App Theme -->
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent_primary</item>
+        <item name="android:colorBackground">@color/background_primary</item>
+        <item name="colorSurface">@color/surface_primary</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:statusBarColor">@color/background_primary</item>
+        <item name="android:navigationBarColor">@color/background_primary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="CustomSwitch" parent="Widget.AppCompat.CompoundButton.Switch">
+    <!-- No Action Bar Theme -->
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Overlay Themes -->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.Material3.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.Material3.Light" />
+    
+    <!-- Custom Button Styles -->
+    <style name="SlideButtonStyle">
+        <item name="android:background">@drawable/slide_button_track_bg</item>
         <item name="android:thumb">@drawable/slide_thumb</item>
-        <item name="android:track">@drawable/slide_track</item>
+        <item name="android:progressDrawable">@drawable/slide_track</item>
+        <item name="android:splitTrack">false</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
     </style>
-
+    
+    <!-- Card Styles -->
+    <style name="StatusCardStyle">
+        <item name="cardBackgroundColor">@color/card_background</item>
+        <item name="cardCornerRadius">@dimen/card_corner_radius</item>
+        <item name="cardElevation">@dimen/elevation_card</item>
+        <item name="contentPadding">@dimen/padding_standard</item>
+        <item name="cardUseCompatPadding">true</item>
+    </style>
+    
+    <!-- Text Styles -->
+    <style name="TextAppearance.Victory.Headline" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textColor">@color/text_headline</item>
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    
+    <style name="TextAppearance.Victory.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+    
+    <style name="TextAppearance.Victory.Caption" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">@dimen/text_caption</item>
+    </style>
+    
+    <!-- Status Indicator Styles -->
+    <style name="StatusIndicatorActive">
+        <item name="android:tint">@color/status_active</item>
+        <item name="android:background">@color/status_active</item>
+    </style>
+    
+    <style name="StatusIndicatorInactive">
+        <item name="android:tint">@color/status_inactive</item>
+        <item name="android:background">@color/status_inactive</item>
+    </style>
+    
+    <style name="StatusIndicatorReady">
+        <item name="android:tint">@color/status_ready</item>
+        <item name="android:background">@color/status_ready</item>
+    </style>
+    
+    <!-- Floating Widget Theme -->
+    <style name="FloatingWidgetTheme" parent="android:Theme.Translucent.NoTitleBar">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:windowBackground">@color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    
 </resources>

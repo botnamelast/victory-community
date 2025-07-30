@@ -1,25 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">My Awesome App</string> <string name="menu_description">Tombol menu hamburger</string>
-    <string name="root_mode_description">Indikator mode root</string>
-    <string name="eight_ball_description">Ikon bola 8</string>
-    <string name="slide_track_description">Latar belakang trek geser</string>
-    <string name="system_status_description">Ikon status sistem</string>
-    <string name="detection_status_description">Ikon status deteksi</string>
-    <string name="game_status_description">Ikon status game</string>
-
-    <string name="start_helper">Mulai</string>
-    <string name="stop_helper">Berhenti</string>
-    <string name="system_status_title">Status Sistem</string>
-    <string name="waiting_for_game">Menunggu game...</string>
-    <string name="detection_status_title">Status Deteksi</string>
-    <string name="detection_ready">Deteksi siap</string>
-    <string name="game_status_title">Status Game</string>
-    <string name="game_not_detected">Game tidak terdeteksi</string>
-    <string name="quick_settings_title">Pengaturan Cepat</string>
-    <string name="root_mode_title">Mode Root</string>
-
-    <string name="version_info">Versi 1.0.0 (Build 1)</string>
-    <string name="feedback_link">Kirim Masukan</string>
-
+    <string name="app_name">System Helper</string>
+    
+    <!-- Main Activity UI -->
+    <string name="menu_description">Open navigation menu</string>
+    <string name="eight_ball_description">8 Ball Pool icon</string>
+    <string name="slide_track_description">Start/Stop slider track</string>
+    <string name="start_helper">START</string>
+    <string name="stop_helper">STOP</string>
+    
+    <!-- Status Cards -->
+    <string name="system_status_title">System Status</string>
+    <string name="system_status_description">Current system state</string>
+    <string name="detection_status_title">Detection</string>
+    <string name="detection_status_description">Game detection status</string>
+    <string name="game_status_title">8 Ball Pool</string>
+    <string name="game_status_description">Target game status</string>
+    
+    <!-- Status Messages -->
+    <string name="waiting_for_game">Waiting for game</string>
+    <string name="detection_ready">Ready</string>
+    <string name="game_not_detected">Not detected</string>
+    <string name="game_detected">Active</string>
+    <string name="system_active">System Helper running</string>
+    <string name="system_inactive">System Helper stopped</string>
+    
+    <!-- Quick Settings -->
+    <string name="quick_settings_title">Quick Settings</string>
+    <string name="root_mode_title">Root Mode</string>
+    <string name="root_mode_description">Enhanced features with root access</string>
+    
+    <!-- Footer -->
+    <string name="version_info">Victory Community v2.1</string>
+    <string name="feedback_link">💬 Saran &amp; Masukan</string>
+    <string name="telegram_url">https://t.me/yourusername</string>
+    
+    <!-- Popup Messages -->
+    <string name="popup_system_started">✅ System Helper activated</string>
+    <string name="popup_system_stopped">🛑 System Helper stopped</string>
+    <string name="popup_game_detected">🎯 8 Ball Pool detected</string>
+    <string name="popup_game_lost">⚠️ Game not found</string>
+    <string name="popup_root_enabled">🔐 Root mode enabled</string>
+    <string name="popup_root_disabled">🔓 Root mode disabled</string>
+    <string name="popup_permission_needed">⚠️ Permission required</string>
+    
+    <!-- Floating Widget -->
+    <string name="floating_widget_description">Floating game assistant</string>
+    <string name="widget_menu_aim">🎯 Aim Helper</string>
+    <string name="widget_menu_color">🎨 Aim Color</string>
+    <string name="widget_menu_settings">⚙️ Settings</string>
+    <string name="widget_menu_stats">📊 Stats</string>
+    <string name="widget_menu_close">❌ Close</string>
+    <string name="widget_menu_stop">🛑 Stop</string>
+    
+    <!-- Hamburger Menu -->
+    <string name="menu_settings">⚙️ Settings</string>
+    <string name="menu_statistics">📊 Statistics</string>
+    <string name="menu_about">❓ About</string>
+    <string name="menu_updates">🔄 Check Updates</string>
+    <string name="menu_exit">🚪 Exit</string>
+    
+    <!-- Original strings (keep for compatibility) -->
+    <string name="btn_toggle_overlay">Toggle Overlay</string>
+    <string name="btn_settings">Settings</string>
+    <string name="btn_about">About</string>
+    <string name="tv_status">Status</string>
+    
+    <!-- Overlay Service -->
+    <string name="overlay_service_running">Victory overlay is running</string>
+    <string name="overlay_service_stopped">Victory overlay stopped</string>
+    
+    <!-- Permissions -->
+    <string name="permission_overlay_required">Overlay permission is required</string>
+    <string name="permission_storage_required">Storage permission is required</string>
+    
+    <!-- Accessibility -->
+    <string name="accessibility_service_description">Victory Community accessibility service for enhanced overlay features</string>
+    
+    <!-- About Dialog -->
+    <string name="about_title">About Victory Community</string>
+    <string name="about_description">Open-source automation platform for Android</string>
+    <string name="about_version">Version: %1$s</string>
+    <string name="about_mode">Mode: %1$s</string>
+    <string name="about_root_available">Root</string>
+    <string name="about_root_unavailable">Standard</string>
+    
+    <!-- Error Messages -->
+    <string name="error_permission_denied">Permission denied</string>
+    <string name="error_service_failed">Service failed to start</string>
+    <string name="error_root_failed">Root access failed</string>
+    <string name="error_game_not_supported">Game not supported</string>
+    
+    <!-- Success Messages -->
+    <string name="success_permission_granted">Permission granted</string>
+    <string name="success_service_started">Service started successfully</string>
+    <string name="success_root_access">Root access granted</string>
+    
 </resources>
