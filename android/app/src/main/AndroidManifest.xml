@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="1"
+    android:versionName="1.0.0"
+    android:compileSdkVersion="34"
+    android:installLocation="internalOnly">
+
+    <uses-sdk
+        android:minSdkVersion="24"
+        android:targetSdkVersion="34" />
+
     <!-- Overlay Permissions -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -29,12 +37,12 @@
         android:label="System Helper"
         android:icon="@mipmap/ic_launcher"
         android:theme="@style/AppTheme"
-        android:allowBackup="false"
+        android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true">
 
-        <!-- Main Activity -->
+        <!-- Main Activity - FIXED TO MATCH ACTUAL FILE -->
         <activity
             android:name=".SystemHelperActivity"
             android:exported="true"
@@ -47,28 +55,28 @@
             </intent-filter>
         </activity>
 
-        <!-- Settings Activity -->
+        <!-- Settings Activity - FIXED TO MATCH ACTUAL FILE -->
         <activity
             android:name=".ui.DeviceSettingsActivity"
             android:exported="false"
             android:parentActivityName=".SystemHelperActivity"
             android:screenOrientation="portrait" />
 
-        <!-- Display Helper Service -->
+        <!-- Display Helper Service - FIXED TO MATCH ACTUAL FILE -->
         <service
             android:name=".services.DisplayHelperService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="systemExempted" />
 
-        <!-- System Privilege Service -->
+        <!-- System Privilege Service - FIXED TO MATCH ACTUAL FILE -->
         <service
             android:name=".services.SystemPrivilegeService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="systemExempted" />
 
-        <!-- Accessibility Helper Service -->
+        <!-- Accessibility Service - FIXED TO MATCH ACTUAL FILE -->
         <service
             android:name=".services.AccessibilityHelperService"
             android:enabled="false"
@@ -107,8 +115,6 @@
     <!-- Queries for package visibility (Android 11+) -->
     <queries>
         <package android:name="com.android.settings" />
-        <!-- Query 8 Ball Pool specifically -->
-        <package android:name="com.miniclip.eightballpool" />
         <intent>
             <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
         </intent>
