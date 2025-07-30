@@ -10,13 +10,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.View;
 import android.util.Log;
+import android.graphics.Color;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -30,8 +29,8 @@ import com.victory.community.utils.PermissionUtils;
 import com.victory.community.utils.ScreenUtils;
 
 /**
- * System Helper - Main Activity
- * Entry point for the application with permission handling and service management
+ * System Helper - Main Activity with Full Functionality
+ * Overlay assistance app for system interaction
  */
 public class SystemHelperActivity extends AppCompatActivity {
     
@@ -39,114 +38,92 @@ public class SystemHelperActivity extends AppCompatActivity {
     private static final int REQUEST_OVERLAY_PERMISSION = 1001;
     private static final int REQUEST_STORAGE_PERMISSION = 1002;
     
-    // UI Components - supports both simple and complex layouts
-    private Button btnToggleHelper;
+    // UI Components
+    private TextView tvStatus;
+    private Button btnToggleOverlay;
     private Button btnSettings;
     private Button btnAbout;
     private Switch switchRootMode;
-    private TextView tvSystemStatus, tvDetectionStatus, tvGameStatus;
     
-    // Legacy UI components (for complex layout compatibility)
-    private ImageButton btnHamburgerMenu;
-    private SeekBar slideButton;
-    private ImageView ivRootIndicator, ivSystemIndicator, ivDetectionIndicator, ivGameIndicator;
-    private TextView tvFeedbackLink;
+    // Status Indicators
+    private View indicatorOverlay;
+    private View indicatorPermissions;
+    private View indicatorRoot;
     
     // State variables
+    private boolean isOverlayActive = false;
     private boolean isRootMode = false;
-    private boolean overlayServiceRunning = false;
-    private boolean systemHelperActive = false;
+    private boolean hasOverlayPermission = false;
+    private boolean hasRootAccess = false;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_system_helper); // FIXED: Use correct layout
+        setContentView(R.layout.activity_system_helper);
         
         // Initialize UI components
         initializeViews();
         
-        // Check device capabilities
-        checkDeviceCapabilities();
-        
-        // Request necessary permissions
-        requestRequiredPermissions();
+        // Check system capabilities
+        checkSystemCapabilities();
         
         // Setup event listeners
         setupEventListeners();
         
         // Update initial UI state
         updateUI();
+        
+        Log.i(TAG, "SystemHelperActivity initialized");
     }
     
     /**
-     * Initialize all UI views - using actual layout elements
+     * Initialize all UI views
      */
     private void initializeViews() {
-        // Get elements from activity_system_helper.xml
-        TextView tvStatus = findViewById(R.id.tv_status);
-        Button btnToggleOverlay = findViewById(R.id.btn_toggle_overlay);
+        // Main elements
+        tvStatus = findViewById(R.id.tv_status);
+        btnToggleOverlay = findViewById(R.id.btn_toggle_overlay);
         btnSettings = findViewById(R.id.btn_settings);
         btnAbout = findViewById(R.id.btn_about);
+        switchRootMode = findViewById(R.id.switch_root_mode);
         
-        // Map to our internal variables for consistency
-        tvSystemStatus = tvStatus; // Use tv_status as system status display
-        btnToggleHelper = btnToggleOverlay; // Use btn_toggle_overlay as main toggle
+        // Status indicators
+        indicatorOverlay = findViewById(R.id.indicator_overlay);
+        indicatorPermissions = findViewById(R.id.indicator_permissions);
+        indicatorRoot = findViewById(R.id.indicator_root);
         
-        Log.i(TAG, "Using activity_system_helper.xml layout");
-        
-        // Try to find additional elements (these might not exist, that's OK)
-        try {
-            switchRootMode = findViewById(R.id.switch_root_mode);
-            tvDetectionStatus = findViewById(R.id.tv_detection_status);
-            tvGameStatus = findViewById(R.id.tv_game_status);
-        } catch (Exception e) {
-            Log.d(TAG, "Optional UI elements not found: " + e.getMessage());
-        }
+        Log.i(TAG, "UI views initialized");
     }
     
     /**
-     * Create simple fallback UI if main layout elements are missing
+     * Check system capabilities and permissions
      */
-    private void createSimpleUI() {
-        Log.i(TAG, "Creating simple fallback UI");
+    private void checkSystemCapabilities() {
+        // Check overlay permission
+        hasOverlayPermission = PermissionUtils.hasOverlayPermission(this);
         
-        // Create a simple button as fallback
-        android.widget.Button simpleToggle = new android.widget.Button(this);
-        simpleToggle.setText("Toggle System Helper");
-        simpleToggle.setOnClickListener(v -> {
-            if (systemHelperActive) {
-                deactivateSystemHelper();
-            } else {
-                activateSystemHelper();
-            }
-        });
+        // Check root access
+        hasRootAccess = RootUtils.isDeviceRooted() && RootUtils.hasRootAccess();
         
-        // Try to add to main layout
-        try {
-            android.view.ViewGroup mainView = findViewById(android.R.id.content);
-            if (mainView instanceof android.widget.LinearLayout) {
-                ((android.widget.LinearLayout) mainView).addView(simpleToggle);
-            } else if (mainView instanceof android.widget.FrameLayout) {
-                ((android.widget.FrameLayout) mainView).addView(simpleToggle);
+        // Enable/disable root mode switch
+        if (switchRootMode != null) {
+            switchRootMode.setEnabled(hasRootAccess);
+            if (!hasRootAccess) {
+                switchRootMode.setChecked(false);
+                isRootMode = false;
             }
-        } catch (Exception e) {
-            Log.e(TAG, "Failed to add simple UI", e);
         }
+        
+        Log.i(TAG, "System capabilities checked - Overlay: " + hasOverlayPermission + ", Root: " + hasRootAccess);
     }
     
     /**
-     * Setup all event listeners - for activity_system_helper.xml
+     * Setup all event listeners
      */
     private void setupEventListeners() {
-        // Main toggle button (btn_toggle_overlay)
-        if (btnToggleHelper != null) {
-            btnToggleHelper.setOnClickListener(v -> {
-                if (systemHelperActive) {
-                    deactivateSystemHelper();
-                } else {
-                    activateSystemHelper();
-                }
-            });
+        // Main toggle button
+        if (btnToggleOverlay != null) {
+            btnToggleOverlay.setOnClickListener(v -> toggleOverlayService());
         }
         
         // Settings button
@@ -159,63 +136,104 @@ public class SystemHelperActivity extends AppCompatActivity {
             btnAbout.setOnClickListener(v -> showAbout());
         }
         
-        // Root mode switch (if exists in layout)
+        // Root mode switch
         if (switchRootMode != null) {
             switchRootMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                boolean hasRoot = RootUtils.isDeviceRooted() && RootUtils.hasRootAccess();
-                if (isChecked && !hasRoot) {
-                    Toast.makeText(this, "Root access not available", Toast.LENGTH_SHORT).show();
+                if (isChecked && !hasRootAccess) {
+                    Toast.makeText(this, "Root access not available on this device", Toast.LENGTH_SHORT).show();
                     switchRootMode.setChecked(false);
-                } else {
-                    isRootMode = isChecked;
-                    updateUI();
+                    return;
+                }
+                
+                isRootMode = isChecked;
+                updateUI();
+                
+                // If overlay is active, restart with new mode
+                if (isOverlayActive) {
+                    stopOverlayService();
+                    startOverlayService();
                 }
             });
         }
     }
     
     /**
-     * Check device capabilities and determine optimal mode
+     * Toggle overlay service on/off
      */
-    private void checkDeviceCapabilities() {
-        // Check if device is rooted
-        boolean hasRoot = RootUtils.isDeviceRooted() && RootUtils.hasRootAccess();
-        
-        // Update UI to show root availability
-        if (ivRootIndicator != null) {
-            ivRootIndicator.setVisibility(hasRoot ? android.view.View.VISIBLE : android.view.View.GONE);
+    private void toggleOverlayService() {
+        if (isOverlayActive) {
+            stopOverlayService();
+        } else {
+            if (!hasOverlayPermission) {
+                requestOverlayPermission();
+                return;
+            }
+            startOverlayService();
         }
-        
-        if (switchRootMode != null) {
-            switchRootMode.setEnabled(hasRoot);
-        }
-        
-        // Log device info
-        android.util.Log.i(TAG, "Device Info:");
-        android.util.Log.i(TAG, "- Android Version: " + Build.VERSION.RELEASE + " (API " + Build.VERSION.SDK_INT + ")");
-        android.util.Log.i(TAG, "- Root Access: " + hasRoot);
-        android.util.Log.i(TAG, "- Screen Size: " + ScreenUtils.getScreenSize(this));
-        android.util.Log.i(TAG, "- Overlay Permission: " + PermissionUtils.hasOverlayPermission(this));
     }
     
     /**
-     * Request all required permissions
+     * Start the overlay service
      */
-    private void requestRequiredPermissions() {
-        // Check overlay permission (required for both modes)
-        if (!PermissionUtils.hasOverlayPermission(this)) {
-            requestOverlayPermission();
-            return;
+    private void startOverlayService() {
+        try {
+            Intent serviceIntent;
+            
+            if (isRootMode && hasRootAccess) {
+                // Use root privileged service
+                serviceIntent = new Intent(this, SystemPrivilegeService.class);
+                Log.i(TAG, "Starting SystemPrivilegeService (Root Mode)");
+            } else {
+                // Use standard display helper service
+                serviceIntent = new Intent(this, DisplayHelperService.class);
+                Log.i(TAG, "Starting DisplayHelperService (Standard Mode)");
+            }
+            
+            serviceIntent.setAction("SHOW_OVERLAY");
+            
+            // Start foreground service
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                startForegroundService(serviceIntent);
+            } else {
+                startService(serviceIntent);
+            }
+            
+            isOverlayActive = true;
+            updateUI();
+            
+            Toast.makeText(this, "System Helper activated", Toast.LENGTH_SHORT).show();
+            
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to start overlay service", e);
+            Toast.makeText(this, "Failed to start overlay service: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        
-        // Check storage permission
-        if (!PermissionUtils.hasStoragePermission(this)) {
-            requestStoragePermission();
-            return;
+    }
+    
+    /**
+     * Stop the overlay service
+     */
+    private void stopOverlayService() {
+        try {
+            Intent serviceIntent;
+            
+            if (isRootMode && hasRootAccess) {
+                serviceIntent = new Intent(this, SystemPrivilegeService.class);
+            } else {
+                serviceIntent = new Intent(this, DisplayHelperService.class);
+            }
+            
+            serviceIntent.setAction("HIDE_OVERLAY");
+            startService(serviceIntent);
+            
+            isOverlayActive = false;
+            updateUI();
+            
+            Toast.makeText(this, "System Helper deactivated", Toast.LENGTH_SHORT).show();
+            
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to stop overlay service", e);
+            Toast.makeText(this, "Failed to stop overlay service: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        
-        // All permissions granted
-        updateUI();
     }
     
     /**
@@ -224,102 +242,30 @@ public class SystemHelperActivity extends AppCompatActivity {
     private void requestOverlayPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!Settings.canDrawOverlays(this)) {
-                Toast.makeText(this, "Overlay permission required for System Helper", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Please grant overlay permission to use System Helper", Toast.LENGTH_LONG).show();
                 
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
                 intent.setData(Uri.parse("package:" + getPackageName()));
                 startActivityForResult(intent, REQUEST_OVERLAY_PERMISSION);
             }
-        }
-    }
-    
-    /**
-     * Request storage permission
-     */
-    private void requestStoragePermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            String[] permissions = {
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            };
-            
-            ActivityCompat.requestPermissions(this, permissions, REQUEST_STORAGE_PERMISSION);
-        }
-    }
-    
-    /**
-     * Activate system helper
-     */
-    private void activateSystemHelper() {
-        if (!PermissionUtils.hasOverlayPermission(this)) {
-            requestOverlayPermission();
-            return;
-        }
-        
-        Intent serviceIntent;
-        
-        if (isRootMode && RootUtils.hasRootAccess()) {
-            // Use root overlay service for better performance
-            serviceIntent = new Intent(this, SystemPrivilegeService.class);
-            android.util.Log.i(TAG, "Starting Root Privilege Service");
         } else {
-            // Use standard overlay service
-            serviceIntent = new Intent(this, DisplayHelperService.class);
-            android.util.Log.i(TAG, "Starting Display Helper Service");
+            // For older Android versions, permission is granted automatically
+            hasOverlayPermission = true;
+            updateUI();
         }
-        
-        serviceIntent.setAction("SHOW_OVERLAY");
-        
-        // Start foreground service
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            startForegroundService(serviceIntent);
-        } else {
-            startService(serviceIntent);
-        }
-        
-        systemHelperActive = true;
-        overlayServiceRunning = true;
-        
-        Toast.makeText(this, "System Helper Activated", Toast.LENGTH_SHORT).show();
-        updateUI();
-    }
-    
-    /**
-     * Deactivate system helper
-     */
-    private void deactivateSystemHelper() {
-        Intent serviceIntent;
-        
-        if (isRootMode) {
-            serviceIntent = new Intent(this, SystemPrivilegeService.class);
-        } else {
-            serviceIntent = new Intent(this, DisplayHelperService.class);
-        }
-        
-        serviceIntent.setAction("HIDE_OVERLAY");
-        startService(serviceIntent);
-        
-        systemHelperActive = false;
-        overlayServiceRunning = false;
-        
-        Toast.makeText(this, "System Helper Deactivated", Toast.LENGTH_SHORT).show();
-        updateUI();
     }
     
     /**
      * Open settings activity
      */
     private void openSettings() {
-        Intent intent = new Intent(this, DeviceSettingsActivity.class);
-        startActivity(intent);
-    }
-    
-    /**
-     * Open feedback
-     */
-    private void openFeedback() {
-        Toast.makeText(this, "Feedback feature coming soon", Toast.LENGTH_SHORT).show();
-        // TODO: Implement feedback mechanism
+        try {
+            Intent intent = new Intent(this, DeviceSettingsActivity.class);
+            startActivity(intent);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to open settings", e);
+            Toast.makeText(this, "Settings not available", Toast.LENGTH_SHORT).show();
+        }
     }
     
     /**
@@ -327,58 +273,101 @@ public class SystemHelperActivity extends AppCompatActivity {
      */
     private void showAbout() {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        builder.setTitle("System Helper")
-                .setMessage("Open source system helper app\n\nVersion: 1.0.0\nMode: " + (isRootMode ? "Root" : "Standard"))
+        
+        String aboutText = "System Helper v1.0.0\n\n" +
+                          "A system overlay assistance tool\n\n" +
+                          "Features:\n" +
+                          "• Screen overlay assistance\n" +
+                          "• Root mode support\n" +
+                          "• Customizable settings\n\n" +
+                          "Mode: " + (isRootMode ? "Root Privileged" : "Standard") + "\n" +
+                          "Android: " + Build.VERSION.RELEASE + " (API " + Build.VERSION.SDK_INT + ")";
+        
+        builder.setTitle("About System Helper")
+                .setMessage(aboutText)
                 .setPositiveButton("OK", null)
+                .setNeutralButton("GitHub", (dialog, which) -> {
+                    // TODO: Open GitHub repository if needed
+                    Toast.makeText(this, "GitHub repository: github.com/victory-community", Toast.LENGTH_SHORT).show();
+                })
                 .show();
     }
     
     /**
-     * Update UI based on current state - simplified for activity_system_helper.xml
+     * Update UI based on current state
      */
     private void updateUI() {
-        // Update main toggle button
-        if (btnToggleHelper != null) {
-            btnToggleHelper.setText(systemHelperActive ? "Stop System Helper" : "Start System Helper");
-        }
-        
-        // Update status text (tv_status)
-        if (tvSystemStatus != null) {
-            String statusText = "Status: " + (systemHelperActive ? "Active" : "Not Active");
+        // Update main status text
+        if (tvStatus != null) {
+            StringBuilder statusText = new StringBuilder();
+            statusText.append("Status: ").append(isOverlayActive ? "ACTIVE" : "INACTIVE").append("\n");
             
-            // Add permission info
-            if (!PermissionUtils.hasOverlayPermission(this)) {
-                statusText += "\n(Overlay permission required)";
+            if (!hasOverlayPermission) {
+                statusText.append("⚠ Overlay permission required\n");
             }
             
-            // Add root info
-            boolean hasRoot = RootUtils.isDeviceRooted() && RootUtils.hasRootAccess();
-            if (hasRoot && isRootMode) {
-                statusText += "\nMode: Root";
-            } else if (hasRoot) {
-                statusText += "\nMode: Standard (Root available)";
+            if (hasRootAccess) {
+                statusText.append("Mode: ").append(isRootMode ? "ROOT PRIVILEGED" : "STANDARD").append("\n");
+                statusText.append("Root access: Available");
             } else {
-                statusText += "\nMode: Standard";
+                statusText.append("Mode: STANDARD\n");
+                statusText.append("Root access: Not available");
             }
             
-            tvSystemStatus.setText(statusText);
+            tvStatus.setText(statusText.toString());
         }
         
-        // Update additional status texts if they exist
-        if (tvDetectionStatus != null) {
-            tvDetectionStatus.setText(PermissionUtils.hasOverlayPermission(this) ? 
-                getString(R.string.detection_ready) : 
-                "Permission required");
+        // Update toggle button
+        if (btnToggleOverlay != null) {
+            btnToggleOverlay.setText(isOverlayActive ? "Stop System Helper" : "Start System Helper");
+            
+            // Change button color based on state
+            if (isOverlayActive) {
+                btnToggleOverlay.setBackgroundColor(Color.parseColor("#DA3633")); // Red
+            } else if (hasOverlayPermission) {
+                btnToggleOverlay.setBackgroundColor(Color.parseColor("#238636")); // Green
+            } else {
+                btnToggleOverlay.setBackgroundColor(Color.parseColor("#FD7E14")); // Orange
+            }
         }
         
-        if (tvGameStatus != null) {
-            tvGameStatus.setText(systemHelperActive ? 
-                "Helper active" : 
-                getString(R.string.game_not_detected));
+        // Update status indicators
+        updateStatusIndicators();
+        
+        Log.d(TAG, "UI updated - Active: " + isOverlayActive + ", Root: " + isRootMode + ", Permission: " + hasOverlayPermission);
+    }
+    
+    /**
+     * Update visual status indicators
+     */
+    private void updateStatusIndicators() {
+        // Overlay indicator
+        if (indicatorOverlay != null) {
+            if (isOverlayActive) {
+                indicatorOverlay.setBackgroundColor(Color.parseColor("#238636")); // Green - Active
+            } else if (hasOverlayPermission) {
+                indicatorOverlay.setBackgroundColor(Color.parseColor("#FD7E14")); // Orange - Ready
+            } else {
+                indicatorOverlay.setBackgroundColor(Color.parseColor("#DA3633")); // Red - No permission
+            }
         }
         
-        // Note: No complex UI indicators to update since we're using simple layout
-        Log.d(TAG, "UI updated - Active: " + systemHelperActive + ", Root: " + isRootMode);
+        // Permissions indicator
+        if (indicatorPermissions != null) {
+            indicatorPermissions.setBackgroundColor(hasOverlayPermission ? 
+                Color.parseColor("#238636") : Color.parseColor("#DA3633"));
+        }
+        
+        // Root indicator
+        if (indicatorRoot != null) {
+            if (hasRootAccess && isRootMode) {
+                indicatorRoot.setBackgroundColor(Color.parseColor("#238636")); // Green - Active
+            } else if (hasRootAccess) {
+                indicatorRoot.setBackgroundColor(Color.parseColor("#FD7E14")); // Orange - Available
+            } else {
+                indicatorRoot.setBackgroundColor(Color.parseColor("#6F7681")); // Gray - Not available
+            }
+        }
     }
     
     @Override
@@ -386,33 +375,14 @@ public class SystemHelperActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         
         if (requestCode == REQUEST_OVERLAY_PERMISSION) {
-            if (PermissionUtils.hasOverlayPermission(this)) {
-                Toast.makeText(this, "Overlay permission granted", Toast.LENGTH_SHORT).show();
-                updateUI();
+            hasOverlayPermission = PermissionUtils.hasOverlayPermission(this);
+            
+            if (hasOverlayPermission) {
+                Toast.makeText(this, "Overlay permission granted! You can now start the helper.", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Overlay permission denied. App may not work properly.", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
-    
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        
-        if (requestCode == REQUEST_STORAGE_PERMISSION) {
-            boolean allGranted = true;
-            for (int result : grantResults) {
-                if (result != PackageManager.PERMISSION_GRANTED) {
-                    allGranted = false;
-                    break;
-                }
+                Toast.makeText(this, "Overlay permission denied. The app won't work without this permission.", Toast.LENGTH_LONG).show();
             }
             
-            if (allGranted) {
-                Toast.makeText(this, "Storage permissions granted", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(this, "Storage permissions denied. Some features may not work.", Toast.LENGTH_LONG).show();
-            }
             updateUI();
         }
     }
@@ -420,12 +390,21 @@ public class SystemHelperActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        
+        // Recheck permissions and capabilities when returning to app
+        checkSystemCapabilities();
         updateUI();
     }
     
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Clean up if needed
+        
+        // Stop overlay service when app is destroyed
+        if (isOverlayActive) {
+            stopOverlayService();
+        }
+        
+        Log.i(TAG, "SystemHelperActivity destroyed");
     }
 }
