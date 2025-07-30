@@ -72,32 +72,57 @@ public class SystemHelperActivity extends AppCompatActivity {
     }
     
     /**
-     * Initialize all UI views - with null checks for missing elements
+     * Initialize all UI views - with safe null checks
      */
     private void initializeViews() {
-        // Header components - these might not exist in current layout
-        btnHamburgerMenu = findViewById(R.id.btn_hamburger_menu);
-        ivRootIndicator = findViewById(R.id.iv_root_indicator);
+        // Try to find UI elements, but don't crash if they don't exist
+        try {
+            btnHamburgerMenu = findViewById(R.id.btn_hamburger_menu);
+        } catch (Exception e) { 
+            Log.w(TAG, "btn_hamburger_menu not found in layout");
+        }
         
-        // Main slide button - might not exist
-        slideButton = findViewById(R.id.slide_button);
+        try {
+            ivRootIndicator = findViewById(R.id.iv_root_indicator);
+        } catch (Exception e) { 
+            Log.w(TAG, "iv_root_indicator not found in layout");
+        }
         
-        // Status indicators - might not exist
-        tvSystemStatus = findViewById(R.id.tv_system_status);
-        tvDetectionStatus = findViewById(R.id.tv_detection_status);
-        tvGameStatus = findViewById(R.id.tv_game_status);
+        try {
+            slideButton = findViewById(R.id.slide_button);
+        } catch (Exception e) { 
+            Log.w(TAG, "slide_button not found in layout");
+        }
         
-        ivSystemIndicator = findViewById(R.id.iv_system_indicator);
-        ivDetectionIndicator = findViewById(R.id.iv_detection_indicator);
-        ivGameIndicator = findViewById(R.id.iv_game_indicator);
+        try {
+            tvSystemStatus = findViewById(R.id.tv_system_status);
+            tvDetectionStatus = findViewById(R.id.tv_detection_status);
+            tvGameStatus = findViewById(R.id.tv_game_status);
+        } catch (Exception e) { 
+            Log.w(TAG, "Status TextViews not found in layout");
+        }
         
-        // Settings - might not exist
-        switchRootMode = findViewById(R.id.switch_root_mode);
+        try {
+            ivSystemIndicator = findViewById(R.id.iv_system_indicator);
+            ivDetectionIndicator = findViewById(R.id.iv_detection_indicator);
+            ivGameIndicator = findViewById(R.id.iv_game_indicator);
+        } catch (Exception e) { 
+            Log.w(TAG, "Status indicators not found in layout");
+        }
         
-        // Footer - might not exist
-        tvFeedbackLink = findViewById(R.id.tv_feedback_link);
+        try {
+            switchRootMode = findViewById(R.id.switch_root_mode);
+        } catch (Exception e) { 
+            Log.w(TAG, "switch_root_mode not found in layout");
+        }
         
-        // Fallback: Create simple toggle button if layout is different
+        try {
+            tvFeedbackLink = findViewById(R.id.tv_feedback_link);
+        } catch (Exception e) { 
+            Log.w(TAG, "tv_feedback_link not found in layout");
+        }
+        
+        // If main UI elements are not found, create simple fallback
         if (slideButton == null && btnHamburgerMenu == null) {
             createSimpleUI();
         }
@@ -107,15 +132,29 @@ public class SystemHelperActivity extends AppCompatActivity {
      * Create simple fallback UI if main layout elements are missing
      */
     private void createSimpleUI() {
+        Log.i(TAG, "Creating simple fallback UI");
+        
         // Create a simple button as fallback
         android.widget.Button simpleToggle = new android.widget.Button(this);
         simpleToggle.setText("Toggle System Helper");
-        simpleToggle.setOnClickListener(v -> toggleOverlayService());
+        simpleToggle.setOnClickListener(v -> {
+            if (systemHelperActive) {
+                deactivateSystemHelper();
+            } else {
+                activateSystemHelper();
+            }
+        });
         
-        // Add to main layout if possible
-        android.view.ViewGroup mainView = findViewById(android.R.id.content);
-        if (mainView instanceof android.widget.LinearLayout) {
-            ((android.widget.LinearLayout) mainView).addView(simpleToggle);
+        // Try to add to main layout
+        try {
+            android.view.ViewGroup mainView = findViewById(android.R.id.content);
+            if (mainView instanceof android.widget.LinearLayout) {
+                ((android.widget.LinearLayout) mainView).addView(simpleToggle);
+            } else if (mainView instanceof android.widget.FrameLayout) {
+                ((android.widget.FrameLayout) mainView).addView(simpleToggle);
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to add simple UI", e);
         }
     }
     
@@ -423,4 +462,3 @@ public class SystemHelperActivity extends AppCompatActivity {
         // Clean up if needed
     }
 }
-
