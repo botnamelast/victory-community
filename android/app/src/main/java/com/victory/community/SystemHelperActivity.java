@@ -60,7 +60,7 @@ public class SystemHelperActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_system_helper); // FIXED: Use correct layout
         
         // Initialize UI components
         initializeViews();
@@ -79,51 +79,28 @@ public class SystemHelperActivity extends AppCompatActivity {
     }
     
     /**
-     * Initialize all UI views - supports both simple and complex layouts
+     * Initialize all UI views - using actual layout elements
      */
     private void initializeViews() {
-        // Try simple layout first (new approach)
-        btnToggleHelper = findViewById(R.id.btn_toggle_helper);
+        // Get elements from activity_system_helper.xml
+        TextView tvStatus = findViewById(R.id.tv_status);
+        Button btnToggleOverlay = findViewById(R.id.btn_toggle_overlay);
         btnSettings = findViewById(R.id.btn_settings);
         btnAbout = findViewById(R.id.btn_about);
-        switchRootMode = findViewById(R.id.switch_root_mode);
         
-        tvSystemStatus = findViewById(R.id.tv_system_status);
-        tvDetectionStatus = findViewById(R.id.tv_detection_status);
-        tvGameStatus = findViewById(R.id.tv_game_status);
+        // Map to our internal variables for consistency
+        tvSystemStatus = tvStatus; // Use tv_status as system status display
+        btnToggleHelper = btnToggleOverlay; // Use btn_toggle_overlay as main toggle
         
-        // If simple layout elements found, use them
-        if (btnToggleHelper != null) {
-            Log.i(TAG, "Using simple layout");
-            return;
-        }
+        Log.i(TAG, "Using activity_system_helper.xml layout");
         
-        // Fallback to complex layout (original approach)
-        Log.i(TAG, "Trying complex layout elements");
+        // Try to find additional elements (these might not exist, that's OK)
         try {
-            btnHamburgerMenu = findViewById(R.id.btn_hamburger_menu);
-            slideButton = findViewById(R.id.slide_button);
-            ivRootIndicator = findViewById(R.id.iv_root_indicator);
-            tvFeedbackLink = findViewById(R.id.tv_feedback_link);
-            
-            // Try to find status elements from complex layout
-            if (tvSystemStatus == null) tvSystemStatus = findViewById(R.id.tv_system_status);
-            if (tvDetectionStatus == null) tvDetectionStatus = findViewById(R.id.tv_detection_status);
-            if (tvGameStatus == null) tvGameStatus = findViewById(R.id.tv_game_status);
-            if (switchRootMode == null) switchRootMode = findViewById(R.id.switch_root_mode);
-            
-            ivSystemIndicator = findViewById(R.id.iv_system_indicator);
-            ivDetectionIndicator = findViewById(R.id.iv_detection_indicator);
-            ivGameIndicator = findViewById(R.id.iv_game_indicator);
-            
-        } catch (Exception e) { 
-            Log.w(TAG, "Complex layout elements not found", e);
-        }
-        
-        // If neither layout works, create minimal fallback
-        if (btnToggleHelper == null && slideButton == null && btnHamburgerMenu == null) {
-            Log.w(TAG, "No compatible layout found, creating fallback");
-            createSimpleUI();
+            switchRootMode = findViewById(R.id.switch_root_mode);
+            tvDetectionStatus = findViewById(R.id.tv_detection_status);
+            tvGameStatus = findViewById(R.id.tv_game_status);
+        } catch (Exception e) {
+            Log.d(TAG, "Optional UI elements not found: " + e.getMessage());
         }
     }
     
@@ -158,10 +135,10 @@ public class SystemHelperActivity extends AppCompatActivity {
     }
     
     /**
-     * Setup all event listeners - supports both simple and complex layouts
+     * Setup all event listeners - for activity_system_helper.xml
      */
     private void setupEventListeners() {
-        // Simple layout listeners
+        // Main toggle button (btn_toggle_overlay)
         if (btnToggleHelper != null) {
             btnToggleHelper.setOnClickListener(v -> {
                 if (systemHelperActive) {
@@ -172,49 +149,17 @@ public class SystemHelperActivity extends AppCompatActivity {
             });
         }
         
+        // Settings button
         if (btnSettings != null) {
             btnSettings.setOnClickListener(v -> openSettings());
         }
         
+        // About button
         if (btnAbout != null) {
             btnAbout.setOnClickListener(v -> showAbout());
         }
         
-        // Complex layout listeners (fallback)
-        if (btnHamburgerMenu != null) {
-            btnHamburgerMenu.setOnClickListener(v -> openSettings());
-        }
-        
-        if (slideButton != null) {
-            slideButton.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-                @Override
-                public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    if (fromUser && progress > 80) {
-                        if (!systemHelperActive) {
-                            activateSystemHelper();
-                        }
-                    } else if (fromUser && progress < 20) {
-                        if (systemHelperActive) {
-                            deactivateSystemHelper();
-                        }
-                    }
-                }
-                
-                @Override
-                public void onStartTrackingTouch(SeekBar seekBar) {}
-                
-                @Override
-                public void onStopTrackingTouch(SeekBar seekBar) {
-                    if (systemHelperActive) {
-                        seekBar.setProgress(100);
-                    } else {
-                        seekBar.setProgress(0);
-                    }
-                }
-            });
-        }
-        
-        // Root mode switch (common to both layouts)
+        // Root mode switch (if exists in layout)
         if (switchRootMode != null) {
             switchRootMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 boolean hasRoot = RootUtils.isDeviceRooted() && RootUtils.hasRootAccess();
@@ -226,11 +171,6 @@ public class SystemHelperActivity extends AppCompatActivity {
                     updateUI();
                 }
             });
-        }
-        
-        // Feedback link (complex layout only)
-        if (tvFeedbackLink != null) {
-            tvFeedbackLink.setOnClickListener(v -> openFeedback());
         }
     }
     
@@ -394,29 +334,37 @@ public class SystemHelperActivity extends AppCompatActivity {
     }
     
     /**
-     * Update UI based on current state - supports both layouts
+     * Update UI based on current state - simplified for activity_system_helper.xml
      */
     private void updateUI() {
-        // Update simple layout elements
+        // Update main toggle button
         if (btnToggleHelper != null) {
             btnToggleHelper.setText(systemHelperActive ? "Stop System Helper" : "Start System Helper");
-            btnToggleHelper.setBackgroundColor(systemHelperActive ? 
-                ContextCompat.getColor(this, android.R.color.holo_red_dark) : 
-                ContextCompat.getColor(this, android.R.color.holo_green_dark));
         }
         
-        // Update complex layout elements (slide button)
-        if (slideButton != null) {
-            slideButton.setProgress(systemHelperActive ? 100 : 0);
-        }
-        
-        // Update status texts (common to both layouts)
+        // Update status text (tv_status)
         if (tvSystemStatus != null) {
-            tvSystemStatus.setText(systemHelperActive ? 
-                getString(R.string.status_active) : 
-                getString(R.string.waiting_for_game));
+            String statusText = "Status: " + (systemHelperActive ? "Active" : "Not Active");
+            
+            // Add permission info
+            if (!PermissionUtils.hasOverlayPermission(this)) {
+                statusText += "\n(Overlay permission required)";
+            }
+            
+            // Add root info
+            boolean hasRoot = RootUtils.isDeviceRooted() && RootUtils.hasRootAccess();
+            if (hasRoot && isRootMode) {
+                statusText += "\nMode: Root";
+            } else if (hasRoot) {
+                statusText += "\nMode: Standard (Root available)";
+            } else {
+                statusText += "\nMode: Standard";
+            }
+            
+            tvSystemStatus.setText(statusText);
         }
         
+        // Update additional status texts if they exist
         if (tvDetectionStatus != null) {
             tvDetectionStatus.setText(PermissionUtils.hasOverlayPermission(this) ? 
                 getString(R.string.detection_ready) : 
@@ -429,33 +377,8 @@ public class SystemHelperActivity extends AppCompatActivity {
                 getString(R.string.game_not_detected));
         }
         
-        // Update status indicators (complex layout only)
-        try {
-            int activeColor = ContextCompat.getColor(this, android.R.color.holo_green_light);
-            int inactiveColor = ContextCompat.getColor(this, android.R.color.darker_gray);
-            int readyColor = ContextCompat.getColor(this, android.R.color.holo_blue_light);
-            
-            if (ivSystemIndicator != null) {
-                ivSystemIndicator.setColorFilter(systemHelperActive ? activeColor : inactiveColor);
-            }
-            
-            if (ivDetectionIndicator != null) {
-                ivDetectionIndicator.setColorFilter(PermissionUtils.hasOverlayPermission(this) ? 
-                    readyColor : inactiveColor);
-            }
-            
-            if (ivGameIndicator != null) {
-                ivGameIndicator.setColorFilter(systemHelperActive ? activeColor : inactiveColor);
-            }
-            
-            // Update root indicator
-            if (ivRootIndicator != null) {
-                boolean hasRoot = RootUtils.isDeviceRooted() && RootUtils.hasRootAccess();
-                ivRootIndicator.setVisibility(hasRoot ? android.view.View.VISIBLE : android.view.View.GONE);
-            }
-        } catch (Exception e) {
-            Log.w(TAG, "Error updating UI indicators", e);
-        }
+        // Note: No complex UI indicators to update since we're using simple layout
+        Log.d(TAG, "UI updated - Active: " + systemHelperActive + ", Root: " + isRootMode);
     }
     
     @Override
