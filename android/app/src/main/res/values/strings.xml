@@ -6,464 +6,87 @@
     <string name="feedback_link">Telegram: @victory_community</string>
     
     <!-- Main Activity - Original IDs (Fixed) -->
-    <string name="btn_toggle_overlay">Toggle Overlay</string>
-    <string name="btn_settings">Settings</string>
-    <string name="btn_about">About</string>
+    <string name="btn_toggle_overlay">Aktifkan Overlay</string>
+    <string name="btn_settings">Pengaturan</string>
+    <string name="btn_about">Tentang</string>
     <string name="tv_status">Status</string>
     
     <!-- Header & Navigation -->
-    <string name="menu_description">Open menu</string>
-    <string name="eight_ball_description">8 Ball Pool Assistant</string>
-    <string name="slide_track_description">Slide to activate</string>
+    <string name="menu_description">Buka menu</string>
+    <string name="eight_ball_description">Asisten 8 Ball Pool</string>
+    <string name="slide_track_description">Geser untuk mengaktifkan</string>
     
     <!-- Slide Button -->
-    <string name="start_helper">START</string>
-    <string name="stop_helper">STOP</string>
+    <string name="start_helper">MULAI</string>
+    <string name="stop_helper">BERHENTI</string>
     
     <!-- Status Cards -->
-    <string name="system_status_title">System Status</string>
-    <string name="system_status_description">System status indicator</string>
-    <string name="waiting_for_game">Ready for activation</string>
+    <string name="system_status_title">Status Sistem</string>
+    <string name="system_status_description">Indikator status sistem</string>
+    <string name="waiting_for_game">Siap diaktifkan</string>
     
-    <string name="detection_status_title">Detection</string>
-    <string name="detection_status_description">Game detection status</string>
-    <string name="detection_ready">Detection engine ready</string>
+    <string name="detection_status_title">Deteksi</string>
+    <string name="detection_status_description">Status deteksi game</string>
+    <string name="detection_ready">Mesin deteksi siap</string>
     
-    <string name="game_status_title">Game Status</string>
-    <string name="game_status_description">8 Ball Pool game status</string>
-    <string name="game_not_detected">8 Ball Pool not detected</string>
+    <string name="game_status_title">Status Game</string>
+    <string name="game_status_description">Status game 8 Ball Pool</string>
+    <string name="game_not_detected">8 Ball Pool tidak terdeteksi</string>
     
     <!-- Quick Settings -->
-    <string name="quick_settings_title">Quick Settings</string>
-    <string name="root_mode_title">Enhanced Mode</string>
-    <string name="root_mode_description">Enable advanced features with root access</string>
+    <string name="quick_settings_title">Pengaturan Cepat</string>
+    <string name="root_mode_title">Mode Lanjutan</string>
+    <string name="root_mode_description">Aktifkan fitur canggih dengan akses root</string>
     
     <!-- Overlay Service -->
-    <string name="overlay_service_running">Victory overlay is running</string>
-    <string name="overlay_service_stopped">Victory overlay stopped</string>
-    <string name="overlay_notification_title">Victory Community Active</string>
-    <string name="overlay_notification_text">8 Ball Pool assistant is running</string>
+    <string name="overlay_service_running">Overlay Victory aktif</string>
+    <string name="overlay_service_stopped">Overlay Victory berhenti</string>
+    <string name="overlay_notification_title">Victory Community Aktif</string>
+    <string name="overlay_notification_text">Asisten 8 Ball Pool sedang berjalan</string>
     
     <!-- Floating Widget -->
-    <string name="widget_description">Floating 8-ball widget</string>
-    <string name="aim_assistance">Aim Assistance</string>
-    <string name="color_picker">Color Picker</string>
-    <string name="widget_settings">Widget Settings</string>
-    <string name="statistics">Statistics</string>
-    <string name="close_widget">Close Widget</string>
-    <string name="stop_app">Stop App</string>
+    <string name="widget_description">Widget 8-ball mengambang</string>
+    <string name="aim_assistance">Bantuan Arah</string>
+    <string name="color_picker">Pemilih Warna</string>
+    <string name="widget_settings">Pengaturan Widget</string>
+    <string name="statistics">Statistik</string>
+    <string name="close_widget">Tutup Widget</string>
+    <string name="stop_app">Hentikan Aplikasi</string>
     
     <!-- Permissions -->
-    <string name="permission_overlay_required">Overlay permission is required</string>
-    <string name="permission_storage_required">Storage permission is required</string>
-    <string name="permission_accessibility_required">Accessibility service is required for enhanced features</string>
+    <string name="permission_overlay_required">Izin overlay diperlukan</string>
+    <string name="permission_storage_required">Izin penyimpanan diperlukan</string>
+    <string name="permission_accessibility_required">Layanan aksesibilitas diperlukan untuk fitur lanjutan</string>
     
     <!-- Status Messages -->
-    <string name="status_active">Active</string>
-    <string name="status_ready">Ready</string>
-    <string name="status_inactive">Inactive</string>
+    <string name="status_active">Aktif</string>
+    <string name="status_ready">Siap</string>
+    <string name="status_inactive">Nonaktif</string>
     <string name="status_error">Error</string>
     
     <!-- Toast Messages -->
-    <string name="overlay_started">Victory overlay started</string>
-    <string name="overlay_stopped">Victory overlay stopped</string>
-    <string name="root_access_granted">Enhanced mode enabled</string>
-    <string name="root_access_denied">Root access not available</string>
-    <string name="game_detected">8 Ball Pool detected</string>
-    <string name="game_lost">8 Ball Pool closed</string>
+    <string name="overlay_started">Overlay Victory dimulai</string>
+    <string name="overlay_stopped">Overlay Victory dihentikan</string>
+    <string name="root_access_granted">Mode lanjutan diaktifkan</string>
+    <string name="root_access_denied">Akses root tidak tersedia</string>
+    <string name="game_detected">8 Ball Pool terdeteksi</string>
+    <string name="game_lost">8 Ball Pool ditutup</string>
     
     <!-- Error Messages -->
-    <string name="error_overlay_permission">Overlay permission denied</string>
-    <string name="error_service_start">Failed to start overlay service</string>
-    <string name="error_accessibility_service">Accessibility service not enabled</string>
-    <string name="error_root_access">Root access required for this feature</string>
-    <string name="error_game_not_found">8 Ball Pool not installed</string>
-    <string name="error_calibration_failed">Table calibration failed</string>
-    <string name="error_detection_failed">Game detection failed</string>
-    <string name="error_physics_engine">Physics calculation error</string>
-    <string name="error_network_connection">Network connection error</string>
-    <string name="error_file_not_found">File not found</string>
-    <string name="error_permission_denied">Permission denied</string>
-    <string name="error_unknown">Unknown error occurred</string>
+    <string name="error_overlay_permission">Izin overlay ditolak</string>
+    <string name="error_service_start">Gagal memulai layanan overlay</string>
+    <string name="error_accessibility_service">Layanan aksesibilitas tidak aktif</string>
+    <string name="error_root_access">Akses root diperlukan untuk fitur ini</string>
+    <string name="error_game_not_found">8 Ball Pool tidak terinstal</string>
+    <string name="error_calibration_failed">Kalibrasi meja gagal</string>
+    <string name="error_detection_failed">Deteksi game gagal</string>
+    <string name="error_physics_engine">Error perhitungan fisika</string>
+    <string name="error_network_connection">Error koneksi jaringan</string>
+    <string name="error_file_not_found">File tidak ditemukan</string>
+    <string name="error_permission_denied">Izin ditolak</string>
+    <string name="error_unknown">Terjadi error tidak diketahui</string>
     
-    <!-- Accessibility -->
-    <string name="accessibility_service_description">Victory Community accessibility service for enhanced overlay features</string>
-    <string name="accessibility_service_summary">Provides game detection and enhanced overlay positioning</string>
-    
-    <!-- Settings Categories -->
-    <string name="settings_title">Settings</string>
-    <string name="settings_general">General</string>
-    <string name="settings_overlay">Overlay</string>
-    <string name="settings_game">Game Features</string>
-    <string name="settings_advanced">Advanced</string>
-    <string name="settings_about">About</string>
-    <string name="settings_backup">Backup &amp; Restore</string>
-    <string name="settings_community">Community</string>
-    
-    <!-- General Settings -->
-    <string name="general_language">Language</string>
-    <string name="general_theme">Theme</string>
-    <string name="general_notifications">Notifications</string>
-    <string name="general_sounds">Sound Effects</string>
-    <string name="general_vibration">Vibration</string>
-    <string name="general_auto_start">Auto Start</string>
-    <string name="general_minimize_on_start">Minimize on Start</string>
-    <string name="general_show_tutorial">Show Tutorial</string>
-    
-    <!-- Widget Customization -->
-    <string name="widget_size">Widget Size</string>
-    <string name="widget_opacity">Widget Opacity</string>
-    <string name="widget_position">Widget Position</string>
-    <string name="widget_auto_hide">Auto Hide Widget</string>
-    <string name="widget_edge_snap">Snap to Edge</string>
-    <string name="widget_animation">Animation Effects</string>
-    <string name="widget_theme">Widget Theme</string>
-    <string name="widget_reset_position">Reset Position</string>
-    <string name="widget_drag_sensitivity">Drag Sensitivity</string>
-    <string name="widget_touch_feedback">Touch Feedback</string>
-    
-    <!-- Game Features -->
-    <string name="trajectory_prediction">Trajectory Prediction</string>
-    <string name="aim_assistance_enabled">Aim Assistance Enabled</string>
-    <string name="physics_calculation">Physics Calculation</string>
-    <string name="table_calibration">Table Calibration</string>
-    <string name="ball_detection">Ball Detection</string>
-    <string name="multi_bounce_prediction">Multi-bounce Prediction</string>
-    <string name="spin_calculation">Spin Calculation</string>
-    <string name="power_meter">Power Meter</string>
-    <string name="cue_angle_detection">Cue Angle Detection</string>
-    <string name="shot_prediction">Shot Prediction</string>
-    
-    <!-- Advanced Features -->
-    <string name="physics_engine">Physics Engine</string>
-    <string name="enhanced_accuracy">Enhanced Accuracy</string>
-    <string name="system_integration">System Integration</string>
-    <string name="memory_management">Memory Management</string>
-    <string name="cpu_optimization">CPU Optimization</string>
-    <string name="battery_saver">Battery Saver Mode</string>
-    <string name="developer_mode">Developer Mode</string>
-    <string name="debug_logging">Debug Logging</string>
-    <string name="experimental_features">Experimental Features</string>
-    
-    <!-- Root Mode Features -->
-    <string name="root_mode_enabled">Enhanced Mode Enabled</string>
-    <string name="root_mode_disabled">Standard Mode Active</string>
-    <string name="root_enhanced_accuracy">Enhanced Accuracy</string>
-    <string name="root_advanced_detection">Advanced Detection</string>
-    <string name="root_system_integration">System Integration</string>
-    <string name="root_performance_boost">Performance Boost</string>
-    <string name="root_memory_access">Direct Memory Access</string>
-    <string name="root_system_hooks">System Hooks</string>
-    
-    <!-- Game Detection -->
-    <string name="game_package_name">com.miniclip.eightballpool</string>
-    <string name="game_detection_active">Game Detection Active</string>
-    <string name="game_window_detected">Game Window Detected</string>
-    <string name="game_ui_analysis">UI Analysis Active</string>
-    <string name="game_table_found">Pool Table Located</string>
-    <string name="game_balls_identified">Balls Identified</string>
-    <string name="game_cue_detected">Cue Stick Detected</string>
-    <string name="game_turn_detected">Your Turn Detected</string>
-    <string name="game_shot_completed">Shot Completed</string>
-    <string name="game_match_started">Match Started</string>
-    <string name="game_match_ended">Match Ended</string>
-    
-    <!-- Calibration -->
-    <string name="calibration_title">Table Calibration</string>
-    <string name="calibration_instructions">Tap the four corners of the pool table</string>
-    <string name="calibration_corner_1">Top Left Corner</string>
-    <string name="calibration_corner_2">Top Right Corner</string>
-    <string name="calibration_corner_3">Bottom Left Corner</string>
-    <string name="calibration_corner_4">Bottom Right Corner</string>
-    <string name="calibration_complete">Calibration Complete</string>
-    <string name="calibration_failed">Calibration Failed - Please Retry</string>
-    <string name="calibration_reset">Reset Calibration</string>
-    <string name="calibration_auto">Auto Calibration</string>
-    <string name="calibration_manual">Manual Calibration</string>
-    <string name="calibration_accuracy">Calibration Accuracy</string>
-    
-    <!-- Aim Assistance -->
-    <string name="aim_mode_off">Aim Assistance Off</string>
-    <string name="aim_mode_basic">Basic Aim Line</string>
-    <string name="aim_mode_advanced">Advanced Trajectory</string>
-    <string name="aim_mode_physics">Physics Prediction</string>
-    <string name="aim_crosshair_style">Crosshair Style</string>
-    <string name="aim_line_color">Aim Line Color</string>
-    <string name="aim_line_thickness">Line Thickness</string>
-    <string name="aim_transparency">Aim Transparency</string>
-    <string name="aim_prediction_length">Prediction Length</string>
-    <string name="aim_bounce_visualization">Bounce Visualization</string>
-    <string name="aim_pocket_highlight">Pocket Highlight</string>
-    
-    <!-- Statistics -->
-    <string name="stats_title">Statistics</string>
-    <string name="stats_games_played">Games Played</string>
-    <string name="stats_games_won">Games Won</string>
-    <string name="stats_win_percentage">Win Percentage</string>
-    <string name="stats_perfect_shots">Perfect Shots</string>
-    <string name="stats_accuracy">Shot Accuracy</string>
-    <string name="stats_average_time">Average Turn Time</string>
-    <string name="stats_longest_streak">Longest Win Streak</string>
-    <string name="stats_total_time">Total Play Time</string>
-    <string name="stats_best_break">Best Break</string>
-    <string name="stats_eight_ball_pots">8-Ball Pots</string>
-    <string name="stats_reset">Reset Statistics</string>
-    <string name="stats_export">Export Data</string>
-    <string name="stats_import">Import Data</string>
-    
-    <!-- Performance -->
-    <string name="performance_title">Performance</string>
-    <string name="performance_fps">Frame Rate</string>
-    <string name="performance_latency">Input Latency</string>
-    <string name="performance_memory">Memory Usage</string>
-    <string name="performance_cpu">CPU Usage</string>
-    <string name="performance_battery">Battery Impact</string>
-    <string name="performance_optimization">Auto Optimization</string>
-    <string name="performance_monitoring">Performance Monitoring</string>
-    <string name="performance_alerts">Performance Alerts</string>
-    
-    <!-- Themes -->
-    <string name="theme_default">Default Dark</string>
-    <string name="theme_blue">Ocean Blue</string>
-    <string name="theme_green">Forest Green</string>
-    <string name="theme_red">Fire Red</string>
-    <string name="theme_purple">Royal Purple</string>
-    <string name="theme_orange">Sunset Orange</string>
-    <string name="theme_cyan">Cyber Cyan</string>
-    <string name="theme_custom">Custom Theme</string>
-    
-    <!-- Notifications -->
-    <string name="notification_channel_name">Victory Community</string>
-    <string name="notification_channel_description">Victory Community overlay service notifications</string>
-    <string name="notification_game_detected_title">Game Detected</string>
-    <string name="notification_game_detected_text">8 Ball Pool is now active</string>
-    <string name="notification_calibration_title">Calibration Required</string>
-    <string name="notification_calibration_text">Tap to calibrate table for better accuracy</string>
-    
-    <!-- Dialog Messages -->
-    <string name="dialog_permission_title">Permission Required</string>
-    <string name="dialog_permission_message">Victory Community needs overlay permission to display the floating widget over other apps.</string>
-    <string name="dialog_root_title">Enhanced Mode</string>
-    <string name="dialog_root_message">Enhanced mode provides better performance and additional features. Root access is required.</string>
-    <string name="dialog_about_title">About Victory Community</string>
-    <string name="dialog_about_message">Open source 8 Ball Pool assistant\n\nVersion: 1.0.0\nBuild: Victory-2024\n\nDeveloped by Victory Community\nTelegram: @victory_community</string>
-    <string name="dialog_calibration_title">Table Calibration</string>
-    <string name="dialog_calibration_message">For optimal performance, please calibrate the pool table by tapping its four corners.</string>
-    <string name="dialog_reset_stats_title">Reset Statistics</string>
-    <string name="dialog_reset_stats_message">Are you sure you want to reset all statistics? This action cannot be undone.</string>
-    <string name="dialog_exit_title">Exit Application</string>
-    <string name="dialog_exit_message">Are you sure you want to exit Victory Community?</string>
-    
-    <!-- Button Labels -->
-    <string name="btn_grant">Grant Permission</string>
-    <string name="btn_cancel">Cancel</string>
-    <string name="btn_ok">OK</string>
-    <string name="btn_enable">Enable</string>
-    <string name="btn_disable">Disable</string>
-    <string name="btn_restart">Restart</string>
-    <string name="btn_close">Close</string>
-    <string name="btn_save">Save</string>
-    <string name="btn_reset">Reset</string>
-    <string name="btn_apply">Apply</string>
-    <string name="btn_start">Start</string>
-    <string name="btn_stop">Stop</string>
-    <string name="btn_pause">Pause</string>
-    <string name="btn_resume">Resume</string>
-    <string name="btn_continue">Continue</string>
-    <string name="btn_skip">Skip</string>
-    <string name="btn_next">Next</string>
-    <string name="btn_previous">Previous</string>
-    <string name="btn_finish">Finish</string>
-    <string name="btn_retry">Retry</string>
-    <string name="btn_refresh">Refresh</string>
-    <string name="btn_update">Update</string>
-    <string name="btn_download">Download</string>
-    <string name="btn_install">Install</string>
-    <string name="btn_backup">Backup</string>
-    <string name="btn_restore">Restore</string>
-    <string name="btn_export">Export</string>
-    <string name="btn_import">Import</string>
-    
-    <!-- Menu Items -->
-    <string name="menu_settings">Settings</string>
-    <string name="menu_about">About</string>
-    <string name="menu_help">Help</string>
-    <string name="menu_feedback">Feedback</string>
-    <string name="menu_exit">Exit</string>
-    <string name="menu_calibrate">Calibrate</string>
-    <string name="menu_stats">Statistics</string>
-    <string name="menu_themes">Themes</string>
-    <string name="menu_backup">Backup</string>
-    <string name="menu_community">Community</string>
-    <string name="menu_updates">Updates</string>
-    
-    <!-- Shortcuts -->
-    <string name="shortcut_quick_start">Quick Start</string>
-    <string name="shortcut_calibrate">Calibrate Table</string>
-    <string name="shortcut_toggle_aim">Toggle Aim</string>
-    <string name="shortcut_stats">View Stats</string>
-    <string name="shortcut_settings">Settings</string>
-    
-    <!-- Backup & Restore -->
-    <string name="backup_title">Backup &amp; Restore</string>
-    <string name="backup_settings">Backup Settings</string>
-    <string name="backup_statistics">Backup Statistics</string>
-    <string name="backup_create">Create Backup</string>
-    <string name="backup_restore">Restore Backup</string>
-    <string name="backup_location">Backup Location</string>
-    <string name="backup_success">Backup Created Successfully</string>
-    <string name="backup_failed">Backup Failed</string>
-    <string name="restore_success">Settings Restored Successfully</string>
-    <string name="restore_failed">Restore Failed</string>
-    <string name="backup_file_name">victory_backup_%s.json</string>
-    
-    <!-- Updates -->
-    <string name="update_title">Updates</string>
-    <string name="update_available">Update Available</string>
-    <string name="update_current_version">Current Version</string>
-    <string name="update_latest_version">Latest Version</string>
-    <string name="update_changelog">What\'s New</string>
-    <string name="update_download">Download Update</string>
-    <string name="update_install">Install Update</string>
-    <string name="update_check">Check for Updates</string>
-    <string name="update_auto_check">Auto Check Updates</string>
-    <string name="update_no_updates">No Updates Available</string>
-    <string name="update_checking">Checking for updates...</string>
-    <string name="update_downloading">Downloading update...</string>
-    <string name="update_installing">Installing update...</string>
-    
-    <!-- Community -->
-    <string name="community_title">Victory Community</string>
-    <string name="community_telegram">Telegram Channel</string>
-    <string name="community_github">GitHub Repository</string>
-    <string name="community_discord">Discord Server</string>
-    <string name="community_reddit">Reddit Community</string>
-    <string name="community_feedback">Send Feedback</string>
-    <string name="community_report_bug">Report Bug</string>
-    <string name="community_feature_request">Feature Request</string>
-    <string name="community_contribute">Contribute</string>
-    <string name="community_donate">Donate</string>
-    <string name="community_share">Share App</string>
-    
-    <!-- Legal -->
-    <string name="legal_title">Legal</string>
-    <string name="legal_privacy_policy">Privacy Policy</string>
-    <string name="legal_terms_of_service">Terms of Service</string>
-    <string name="legal_open_source_licenses">Open Source Licenses</string>
-    <string name="legal_disclaimer">Disclaimer</string>
-    <string name="legal_copyright">© 2024 Victory Community</string>
-    
-    <!-- Advanced Settings -->
-    <string name="advanced_title">Advanced Settings</string>
-    <string name="advanced_force_root">Force Root Mode</string>
-    <string name="advanced_custom_detection">Custom Detection</string>
-    <string name="advanced_api_access">API Access</string>
-    <string name="advanced_performance_tweaks">Performance Tweaks</string>
-    <string name="advanced_memory_limits">Memory Limits</string>
-    <string name="advanced_thread_priority">Thread Priority</string>
-    <string name="advanced_gpu_acceleration">GPU Acceleration</string>
-    
-    <!-- Debug -->
-    <string name="debug_title">Debug Information</string>
-    <string name="debug_device_info">Device Information</string>
-    <string name="debug_system_info">System Information</string>
-    <string name="debug_app_info">App Information</string>
-    <string name="debug_permissions">Permissions Status</string>
-    <string name="debug_services">Services Status</string>
-    <string name="debug_logs">Debug Logs</string>
-    <string name="debug_export_logs">Export Logs</string>
-    <string name="debug_clear_logs">Clear Logs</string>
-    <string name="debug_crash_reports">Crash Reports</string>
-    <string name="debug_performance_metrics">Performance Metrics</string>
-    
-    <!-- Tutorials -->
-    <string name="tutorial_title">Tutorial</string>
-    <string name="tutorial_welcome">Welcome to Victory Community</string>
-    <string name="tutorial_step_1">Step 1: Grant Permissions</string>
-    <string name="tutorial_step_2">Step 2: Open 8 Ball Pool</string>
-    <string name="tutorial_step_3">Step 3: Calibrate Table</string>
-    <string name="tutorial_step_4">Step 4: Enable Aim Assistance</string>
-    <string name="tutorial_step_5">Step 5: Customize Widget</string>
-    <string name="tutorial_skip">Skip Tutorial</string>
-    
-    <!-- Contextual Help -->
-    <string name="help_overlay_permission">This permission allows Victory Community to display the floating widget over other apps, including 8 Ball Pool.</string>
-    <string name="help_accessibility_service">The accessibility service helps detect when 8 Ball Pool is active and provides enhanced features.</string>
-    <string name="help_root_mode">Root mode enables advanced features like improved accuracy and system-level optimizations.</string>
-    <string name="help_calibration">Calibration helps Victory Community understand your screen layout for accurate aim assistance.</string>
-    <string name="help_widget_customization">Customize the floating widget\'s appearance, size, and behavior to your preference.</string>
-    <string name="help_physics_engine">The physics engine calculates ball trajectories, bounces, and collisions for accurate shot prediction.</string>
-    <string name="help_statistics">Statistics track your gameplay performance and help you improve your skills over time.</string>
-    
-    <!-- Validation Messages -->
-    <string name="validation_invalid_input">Invalid input</string>
-    <string name="validation_value_too_low">Value too low (minimum: %d)</string>
-    <string name="validation_value_too_high">Value too high (maximum: %d)</string>
-    <string name="validation_required_field">This field is required</string>
-    <string name="validation_invalid_format">Invalid format</string>
-    <string name="validation_file_not_exist">File does not exist</string>
-    <string name="validation_permission_denied">Permission denied</string>
-    
-    <!-- Units -->
-    <string name="unit_pixels">px</string>
-    <string name="unit_density_pixels">dp</string>
-    <string name="unit_scale_pixels">sp</string>
-    <string name="unit_percentage">%</string>
-    <string name="unit_milliseconds">ms</string>
-    <string name="unit_seconds">s</string>
-    <string name="unit_minutes">min</string>
-    <string name="unit_hours">hr</string>
-    <string name="unit_fps">fps</string>
-    <string name="unit_mb">MB</string>
-    <string name="unit_kb">KB</string>
-    <string name="unit_degrees">°</string>
-    
-    <!-- Time Formats -->
-    <string name="time_just_now">Just now</string>
-    <string name="time_minutes_ago">%d minutes ago</string>
-    <string name="time_hours_ago">%d hours ago</string>
-    <string name="time_days_ago">%d days ago</string>
-    <string name="time_weeks_ago">%d weeks ago</string>
-    <string name="time_format_short">%02d:%02d</string>
-    <string name="time_format_long">%02d:%02d:%02d</string>
-    
-    <!-- Status Descriptions -->
-    <string name="status_connecting">Connecting...</string>
-    <string name="status_loading">Loading...</string>
-    <string name="status_processing">Processing...</string>
-    <string name="status_calibrating">Calibrating...</string>
-    <string name="status_analyzing">Analyzing...</string>
-    <string name="status_calculating">Calculating...</string>
-    <string name="status_optimizing">Optimizing...</string>
-    <string name="status_complete">Complete</string>
-    <string name="status_failed">Failed</string>
-    <string name="status_cancelled">Cancelled</string>
-    <string name="status_paused">Paused</string>
-    <string name="status_resumed">Resumed</string>
-    
-    <!-- Plurals Support -->
-    <plurals name="games_count">
-        <item quantity="zero">No games</item>
-        <item quantity="one">%d game</item>
-        <item quantity="other">%d games</item>
-    </plurals>
-    
-    <plurals name="shots_count">
-        <item quantity="zero">No shots</item>
-        <item quantity="one">%d shot</item>
-        <item quantity="other">%d shots</item>
-    </plurals>
-    
-    <plurals name="minutes_count">
-        <item quantity="zero">No minutes</item>
-        <item quantity="one">%d minute</item>
-        <item quantity="other">%d minutes</item>
-    </plurals>
-    
-    <plurals name="hours_count">
-        <item quantity="zero">No hours</item>
-        <item quantity="one">%d hour</item>
-        <item quantity="other">%d hours</item>
-    </plurals>
-
+    <!-- Time Formats (Fixed) -->
+    <string name="time_format_short">%1$02d:%2$02d</string>
+    <string name="time_format_long">%1$02d:%2$02d:%3$02d</string>
 </resources>
