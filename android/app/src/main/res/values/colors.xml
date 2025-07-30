@@ -57,6 +57,22 @@
     <color name="ball_detected">#FF4CAF50</color>
     <color name="table_marker">#FFFF9800</color>
     
+    <!-- Card Colors -->
+    <color name="card_background">#2E2E2E</color>
+    <color name="card_surface">#3E3E3E</color>
+    <color name="card_border">#555555</color>
+    <color name="card_shadow">#1A000000</color>
+    
+    <!-- Extended Text Colors -->
+    <color name="text_headline">#FFFFFF</color>
+    <color name="text_display">#FFFFFF</color>
+    <color name="text_body_large">#E0E0E0</color>
+    <color name="text_body_medium">#CCCCCC</color>
+    <color name="text_body_small">#B3B3B3</color>
+    <color name="text_label_large">#FFFFFF</color>
+    <color name="text_label_medium">#CCCCCC</color>
+    <color name="text_label_small">#999999</color>
+    
     <!-- Material Design Colors (for compatibility) -->
     <color name="material_blue_500">#2196F3</color>
     <color name="material_blue_700">#1976D2</color>
