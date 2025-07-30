@@ -19,8 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.victory.community.services.OverlayService;
-import com.victory.community.services.RootOverlayService;
+import com.victory.community.services.DisplayHelperService;
+import com.victory.community.services.SystemPrivilegeService;
 import com.victory.community.utils.RootUtils;
 import com.victory.community.utils.PermissionUtils;
 import com.victory.community.utils.ScreenUtils;
