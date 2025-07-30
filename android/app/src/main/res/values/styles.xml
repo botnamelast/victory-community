@@ -149,7 +149,7 @@
     <style name="StatusIndicator.Victory" parent="">
         <item name="android:layout_width">@dimen/status_indicator_size</item>
         <item name="android:layout_height">@dimen/status_indicator_size</item>
-        <item name="android:background">@android:drawable/oval_shape</item>
+        <item name="android:background">@drawable/status_indicator</item>
     </style>
 
     <style name="StatusIndicator.Victory.Active">
