@@ -11,9 +11,11 @@ import android.widget.*;
 import android.preference.PreferenceManager;
 import java.util.ArrayList;
 import java.util.List;
-import com.android.systemhelper.utils.ProfileManager;
-import com.android.systemhelper.services.DisplayHelperService;
-import com.android.systemhelper.services.SystemPrivilegeService;
+
+// FIXED IMPORTS - Using correct package names
+import com.victory.community.utils.ProfileManager;
+import com.victory.community.services.DisplayHelperService;
+import com.victory.community.services.SystemPrivilegeService;
 
 /**
  * Modern settings activity with real-time preview and profile management
@@ -79,7 +81,7 @@ public class DeviceSettingsActivity extends Activity {
         
         // Title
         TextView titleText = new TextView(this);
-        titleText.setText("Victory Community Overlay Settings");
+        titleText.setText("System Helper Settings");
         titleText.setTextSize(24);
         titleText.setTextColor(Color.WHITE);
         titleText.setPadding(0, 0, 0, 30);
@@ -400,27 +402,25 @@ public class DeviceSettingsActivity extends Activity {
     private void setupEventListeners() {
         toggleOverlayButton.setOnClickListener(v -> toggleOverlay());
         rootModeButton.setOnClickListener(v -> toggleRootMode());
-
+        
         rootModeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             isRootMode = isChecked;
             framebufferSwitch.setEnabled(isChecked);
             systemInjectionSwitch.setEnabled(isChecked);
         });
-
+        
         framebufferSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                // Menggunakan SystemPrivilegeService, bukan DisplayHelperService
+                // FIXED: Use correct service method
                 SystemPrivilegeService.enableDirectFramebuffer(this);
             }
-            // Jika perlu, bisa juga handle switch off logic
         });
-
+        
         systemInjectionSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                // Menggunakan SystemPrivilegeService, bukan DisplayHelperService
+                // FIXED: Use correct service method
                 SystemPrivilegeService.enableSystemInjection(this);
             }
-            // Jika perlu, bisa juga handle switch off logic
         });
     }
 
@@ -475,7 +475,6 @@ public class DeviceSettingsActivity extends Activity {
     private void toggleOverlay() {
         if (isOverlayActive) {
             if (isRootMode) {
-                // STOP root mode overlay
                 stopService(new Intent(this, SystemPrivilegeService.class));
             } else {
                 DisplayHelperService.stopOverlay(this);
@@ -485,7 +484,6 @@ public class DeviceSettingsActivity extends Activity {
             isOverlayActive = false;
         } else {
             if (isRootMode) {
-                // START root mode overlay, gunakan method yang benar dan ada
                 SystemPrivilegeService.startPrivilegedService(this);
             } else {
                 DisplayHelperService.startOverlay(this);
@@ -508,7 +506,7 @@ public class DeviceSettingsActivity extends Activity {
     private void updateOverlaySettings() {
         if (isRootMode) {
             // Update root overlay settings
-            // This would require extending RootOverlayService with update methods
+            // This would require extending SystemPrivilegeService with update methods
         } else {
             DisplayHelperService.updateOverlay(this, currentX, currentY, 
                 currentSize, currentSize, currentOpacity / 100.0f);
@@ -567,3 +565,4 @@ public class DeviceSettingsActivity extends Activity {
         void onSeekBarCreated(SeekBar seekBar);
     }
 }
+

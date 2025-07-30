@@ -72,17 +72,17 @@ public class SystemHelperActivity extends AppCompatActivity {
     }
     
     /**
-     * Initialize all UI views
+     * Initialize all UI views - with null checks for missing elements
      */
     private void initializeViews() {
-        // Header components
+        // Header components - these might not exist in current layout
         btnHamburgerMenu = findViewById(R.id.btn_hamburger_menu);
         ivRootIndicator = findViewById(R.id.iv_root_indicator);
         
-        // Main slide button
+        // Main slide button - might not exist
         slideButton = findViewById(R.id.slide_button);
         
-        // Status indicators
+        // Status indicators - might not exist
         tvSystemStatus = findViewById(R.id.tv_system_status);
         tvDetectionStatus = findViewById(R.id.tv_detection_status);
         tvGameStatus = findViewById(R.id.tv_game_status);
@@ -91,11 +91,32 @@ public class SystemHelperActivity extends AppCompatActivity {
         ivDetectionIndicator = findViewById(R.id.iv_detection_indicator);
         ivGameIndicator = findViewById(R.id.iv_game_indicator);
         
-        // Settings
+        // Settings - might not exist
         switchRootMode = findViewById(R.id.switch_root_mode);
         
-        // Footer
+        // Footer - might not exist
         tvFeedbackLink = findViewById(R.id.tv_feedback_link);
+        
+        // Fallback: Create simple toggle button if layout is different
+        if (slideButton == null && btnHamburgerMenu == null) {
+            createSimpleUI();
+        }
+    }
+    
+    /**
+     * Create simple fallback UI if main layout elements are missing
+     */
+    private void createSimpleUI() {
+        // Create a simple button as fallback
+        android.widget.Button simpleToggle = new android.widget.Button(this);
+        simpleToggle.setText("Toggle System Helper");
+        simpleToggle.setOnClickListener(v -> toggleOverlayService());
+        
+        // Add to main layout if possible
+        android.view.ViewGroup mainView = findViewById(android.R.id.content);
+        if (mainView instanceof android.widget.LinearLayout) {
+            ((android.widget.LinearLayout) mainView).addView(simpleToggle);
+        }
     }
     
     /**
@@ -402,3 +423,4 @@ public class SystemHelperActivity extends AppCompatActivity {
         // Clean up if needed
     }
 }
+
