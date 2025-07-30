@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.victory.community"
     android:versionCode="1"
     android:versionName="1.0.0"
     android:compileSdkVersion="34"
@@ -42,7 +43,7 @@
         android:supportsRtl="true"
         android:requestLegacyExternalStorage="true">
 
-        <!-- STEALTH: Main Activity with innocent name -->
+        <!-- Main Activity -->
         <activity
             android:name=".SystemHelperActivity"
             android:exported="true"
@@ -55,28 +56,28 @@
             </intent-filter>
         </activity>
 
-        <!-- STEALTH: Settings Activity -->
+        <!-- Settings Activity -->
         <activity
             android:name=".ui.DeviceSettingsActivity"
             android:exported="false"
             android:parentActivityName=".SystemHelperActivity"
             android:screenOrientation="portrait" />
 
-        <!-- STEALTH: Overlay Service with innocent name -->
+        <!-- Display Helper Service -->
         <service
             android:name=".services.DisplayHelperService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="systemExempted" />
 
-        <!-- STEALTH: Root Overlay Service -->
+        <!-- System Privilege Service -->
         <service
             android:name=".services.SystemPrivilegeService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="systemExempted" />
 
-        <!-- STEALTH: Accessibility Service with innocent name -->
+        <!-- Accessibility Helper Service -->
         <service
             android:name=".services.AccessibilityHelperService"
             android:enabled="false"
@@ -89,19 +90,6 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
         </service>
-
-        <!-- STEALTH: Boot Receiver (keep disabled by default) -->
-        <receiver
-            android:name=".receivers.SystemBootReceiver"
-            android:enabled="false"
-            android:exported="false">
-            <intent-filter android:priority="1000">
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
 
         <!-- File Provider for sharing configs -->
         <provider
@@ -128,7 +116,7 @@
     <!-- Queries for package visibility (Android 11+) -->
     <queries>
         <package android:name="com.android.settings" />
-        <!-- STEALTH: Only query 8 Ball Pool specifically -->
+        <!-- Query 8 Ball Pool specifically -->
         <package android:name="com.miniclip.eightballpool" />
         <intent>
             <action android:name="android.settings.ACCESSIBILITY_SETTINGS" />
