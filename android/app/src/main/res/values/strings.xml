@@ -138,7 +138,6 @@
     <string name="physics_engine">Physics Engine</string>
     <string name="enhanced_accuracy">Enhanced Accuracy</string>
     <string name="system_integration">System Integration</string>
-    <string name="performance_optimization">Performance Optimization</string>
     <string name="memory_management">Memory Management</string>
     <string name="cpu_optimization">CPU Optimization</string>
     <string name="battery_saver">Battery Saver Mode</string>
