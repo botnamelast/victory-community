@@ -18,9 +18,9 @@
         android:gravity="center_vertical"
         android:elevation="@dimen/elevation_header">
 
-        <!-- Hamburger Menu Button -->
+        <!-- Hamburger Menu Button (acts as settings) -->
         <ImageButton
-            android:id="@+id/btn_hamburger_menu"
+            android:id="@+id/btn_settings"
             android:layout_width="@dimen/button_icon_size"
             android:layout_height="@dimen/button_icon_size"
             android:src="@drawable/ic_hamburger"
@@ -104,9 +104,9 @@
                             android:scaleType="fitXY"
                             android:contentDescription="@string/slide_track_description" />
 
-                        <!-- Custom Slide Button -->
+                        <!-- Custom Slide Button (acts as toggle overlay) -->
                         <SeekBar
-                            android:id="@+id/slide_button"
+                            android:id="@+id/btn_toggle_overlay"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:max="100"
@@ -196,7 +196,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/tv_system_status"
+                                android:id="@+id/tv_status"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/waiting_for_game"
@@ -437,9 +437,9 @@
             android:textSize="@dimen/text_caption"
             android:layout_gravity="center" />
 
-        <!-- Feedback Link -->
+        <!-- Feedback Link (acts as about button) -->
         <TextView
-            android:id="@+id/tv_feedback_link"
+            android:id="@+id/btn_about"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/feedback_link"
