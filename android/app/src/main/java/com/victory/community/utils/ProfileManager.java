@@ -1,4 +1,4 @@
-package com.android.systemhelper.utils;
+package com.victory.community.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

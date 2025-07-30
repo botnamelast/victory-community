@@ -1,4 +1,4 @@
-package com.android.systemhelper.utils;
+package com.victory.community.utils;
 
 public class RootUtils {
     public static boolean isDeviceRooted() { return false; }

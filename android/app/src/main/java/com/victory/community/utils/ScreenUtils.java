@@ -1,4 +1,4 @@
-package com.android.systemhelper.utils;
+package com.victory.community.utils;
 
 public class ScreenUtils {
     public static String getScreenSize(android.content.Context context) {

@@ -1,4 +1,4 @@
-package com.android.systemhelper.ui;
+package com.victory.community.ui;
 
 import android.app.Activity;
 import android.content.Intent;

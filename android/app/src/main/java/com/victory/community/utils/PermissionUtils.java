@@ -1,4 +1,4 @@
-package com.android.systemhelper.utils;
+package com.victory.community.utils;
 
 public class PermissionUtils {
     public static boolean hasOverlayPermission(android.content.Context context) { return true; }

@@ -1,4 +1,4 @@
-package com.android.systemhelper;
+package com.victory.community;
 
 import android.app.Activity;
 import android.os.Bundle;

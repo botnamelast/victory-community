@@ -1,4 +1,4 @@
-package com.android.systemhelper.services;
+package com.victory.community.services;
 
 import android.app.Service;
 import android.content.Intent;
