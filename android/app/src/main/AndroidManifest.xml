@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.victory.community"
-    android:versionCode="1"
-    android:versionName="1.0.0"
-    android:compileSdkVersion="34"
-    android:installLocation="internalOnly">
-
-    <uses-sdk
-        android:minSdkVersion="24"
-        android:targetSdkVersion="34" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Overlay Permissions -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
