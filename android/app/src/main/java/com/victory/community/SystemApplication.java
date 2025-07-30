@@ -1,6 +1,6 @@
 package com.victory.community;
 
-import android.app.Application;
+import com.victory.community.Application;
 
 public class SystemApplication extends Application {
     @Override
