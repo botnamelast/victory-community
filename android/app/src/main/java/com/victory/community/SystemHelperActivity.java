@@ -37,11 +37,16 @@ public class SystemHelperActivity extends AppCompatActivity {
     private static final int REQUEST_OVERLAY_PERMISSION = 1001;
     private static final int REQUEST_STORAGE_PERMISSION = 1002;
     
-    // UI Components
-    private ImageButton btnHamburgerMenu;
-    private SeekBar slideButton;
+    // UI Components - updated for simple layout
+    private Button btnToggleHelper;
+    private Button btnSettings;
+    private Button btnAbout;
     private Switch switchRootMode;
     private TextView tvSystemStatus, tvDetectionStatus, tvGameStatus;
+    
+    // Legacy UI components (for complex layout compatibility)
+    private ImageButton btnHamburgerMenu;
+    private SeekBar slideButton;
     private ImageView ivRootIndicator, ivSystemIndicator, ivDetectionIndicator, ivGameIndicator;
     private TextView tvFeedbackLink;
     
@@ -72,58 +77,50 @@ public class SystemHelperActivity extends AppCompatActivity {
     }
     
     /**
-     * Initialize all UI views - with safe null checks
+     * Initialize all UI views - supports both simple and complex layouts
      */
     private void initializeViews() {
-        // Try to find UI elements, but don't crash if they don't exist
+        // Try simple layout first (new approach)
+        btnToggleHelper = findViewById(R.id.btn_toggle_helper);
+        btnSettings = findViewById(R.id.btn_settings);
+        btnAbout = findViewById(R.id.btn_about);
+        switchRootMode = findViewById(R.id.switch_root_mode);
+        
+        tvSystemStatus = findViewById(R.id.tv_system_status);
+        tvDetectionStatus = findViewById(R.id.tv_detection_status);
+        tvGameStatus = findViewById(R.id.tv_game_status);
+        
+        // If simple layout elements found, use them
+        if (btnToggleHelper != null) {
+            Log.i(TAG, "Using simple layout");
+            return;
+        }
+        
+        // Fallback to complex layout (original approach)
+        Log.i(TAG, "Trying complex layout elements");
         try {
             btnHamburgerMenu = findViewById(R.id.btn_hamburger_menu);
-        } catch (Exception e) { 
-            Log.w(TAG, "btn_hamburger_menu not found in layout");
-        }
-        
-        try {
-            ivRootIndicator = findViewById(R.id.iv_root_indicator);
-        } catch (Exception e) { 
-            Log.w(TAG, "iv_root_indicator not found in layout");
-        }
-        
-        try {
             slideButton = findViewById(R.id.slide_button);
-        } catch (Exception e) { 
-            Log.w(TAG, "slide_button not found in layout");
-        }
-        
-        try {
-            tvSystemStatus = findViewById(R.id.tv_system_status);
-            tvDetectionStatus = findViewById(R.id.tv_detection_status);
-            tvGameStatus = findViewById(R.id.tv_game_status);
-        } catch (Exception e) { 
-            Log.w(TAG, "Status TextViews not found in layout");
-        }
-        
-        try {
+            ivRootIndicator = findViewById(R.id.iv_root_indicator);
+            tvFeedbackLink = findViewById(R.id.tv_feedback_link);
+            
+            // Try to find status elements from complex layout
+            if (tvSystemStatus == null) tvSystemStatus = findViewById(R.id.tv_system_status);
+            if (tvDetectionStatus == null) tvDetectionStatus = findViewById(R.id.tv_detection_status);
+            if (tvGameStatus == null) tvGameStatus = findViewById(R.id.tv_game_status);
+            if (switchRootMode == null) switchRootMode = findViewById(R.id.switch_root_mode);
+            
             ivSystemIndicator = findViewById(R.id.iv_system_indicator);
             ivDetectionIndicator = findViewById(R.id.iv_detection_indicator);
             ivGameIndicator = findViewById(R.id.iv_game_indicator);
+            
         } catch (Exception e) { 
-            Log.w(TAG, "Status indicators not found in layout");
+            Log.w(TAG, "Complex layout elements not found", e);
         }
         
-        try {
-            switchRootMode = findViewById(R.id.switch_root_mode);
-        } catch (Exception e) { 
-            Log.w(TAG, "switch_root_mode not found in layout");
-        }
-        
-        try {
-            tvFeedbackLink = findViewById(R.id.tv_feedback_link);
-        } catch (Exception e) { 
-            Log.w(TAG, "tv_feedback_link not found in layout");
-        }
-        
-        // If main UI elements are not found, create simple fallback
-        if (slideButton == null && btnHamburgerMenu == null) {
+        // If neither layout works, create minimal fallback
+        if (btnToggleHelper == null && slideButton == null && btnHamburgerMenu == null) {
+            Log.w(TAG, "No compatible layout found, creating fallback");
             createSimpleUI();
         }
     }
@@ -159,26 +156,42 @@ public class SystemHelperActivity extends AppCompatActivity {
     }
     
     /**
-     * Setup all event listeners - with null checks
+     * Setup all event listeners - supports both simple and complex layouts
      */
     private void setupEventListeners() {
-        // Hamburger menu - only if exists
+        // Simple layout listeners
+        if (btnToggleHelper != null) {
+            btnToggleHelper.setOnClickListener(v -> {
+                if (systemHelperActive) {
+                    deactivateSystemHelper();
+                } else {
+                    activateSystemHelper();
+                }
+            });
+        }
+        
+        if (btnSettings != null) {
+            btnSettings.setOnClickListener(v -> openSettings());
+        }
+        
+        if (btnAbout != null) {
+            btnAbout.setOnClickListener(v -> showAbout());
+        }
+        
+        // Complex layout listeners (fallback)
         if (btnHamburgerMenu != null) {
             btnHamburgerMenu.setOnClickListener(v -> openSettings());
         }
         
-        // Main slide button - only if exists
         if (slideButton != null) {
             slideButton.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                     if (fromUser && progress > 80) {
-                        // Activate helper when slid to the end
                         if (!systemHelperActive) {
                             activateSystemHelper();
                         }
                     } else if (fromUser && progress < 20) {
-                        // Deactivate helper when slid to start
                         if (systemHelperActive) {
                             deactivateSystemHelper();
                         }
@@ -190,7 +203,6 @@ public class SystemHelperActivity extends AppCompatActivity {
                 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
-                    // Snap to position based on current state
                     if (systemHelperActive) {
                         seekBar.setProgress(100);
                     } else {
@@ -200,10 +212,11 @@ public class SystemHelperActivity extends AppCompatActivity {
             });
         }
         
-        // Root mode switch - only if exists
+        // Root mode switch (common to both layouts)
         if (switchRootMode != null) {
             switchRootMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (isChecked && !isRootMode) {
+                boolean hasRoot = RootUtils.isDeviceRooted() && RootUtils.hasRootAccess();
+                if (isChecked && !hasRoot) {
                     Toast.makeText(this, "Root access not available", Toast.LENGTH_SHORT).show();
                     switchRootMode.setChecked(false);
                 } else {
@@ -213,7 +226,7 @@ public class SystemHelperActivity extends AppCompatActivity {
             });
         }
         
-        // Feedback link - only if exists
+        // Feedback link (complex layout only)
         if (tvFeedbackLink != null) {
             tvFeedbackLink.setOnClickListener(v -> openFeedback());
         }
@@ -368,15 +381,23 @@ public class SystemHelperActivity extends AppCompatActivity {
     }
     
     /**
-     * Update UI based on current state
+     * Update UI based on current state - supports both layouts
      */
     private void updateUI() {
-        // Update slide button position
+        // Update simple layout elements
+        if (btnToggleHelper != null) {
+            btnToggleHelper.setText(systemHelperActive ? "Stop System Helper" : "Start System Helper");
+            btnToggleHelper.setBackgroundColor(systemHelperActive ? 
+                ContextCompat.getColor(this, android.R.color.holo_red_dark) : 
+                ContextCompat.getColor(this, android.R.color.holo_green_dark));
+        }
+        
+        // Update complex layout elements (slide button)
         if (slideButton != null) {
             slideButton.setProgress(systemHelperActive ? 100 : 0);
         }
         
-        // Update status texts
+        // Update status texts (common to both layouts)
         if (tvSystemStatus != null) {
             tvSystemStatus.setText(systemHelperActive ? 
                 getString(R.string.status_active) : 
@@ -395,8 +416,30 @@ public class SystemHelperActivity extends AppCompatActivity {
                 getString(R.string.game_not_detected));
         }
         
-        // Update status indicators
+        // Update status indicators (complex layout only)
         int activeColor = ContextCompat.getColor(this, android.R.color.holo_green_light);
+        int inactiveColor = ContextCompat.getColor(this, android.R.color.darker_gray);
+        int readyColor = ContextCompat.getColor(this, android.R.color.holo_blue_light);
+        
+        if (ivSystemIndicator != null) {
+            ivSystemIndicator.setColorFilter(systemHelperActive ? activeColor : inactiveColor);
+        }
+        
+        if (ivDetectionIndicator != null) {
+            ivDetectionIndicator.setColorFilter(PermissionUtils.hasOverlayPermission(this) ? 
+                readyColor : inactiveColor);
+        }
+        
+        if (ivGameIndicator != null) {
+            ivGameIndicator.setColorFilter(systemHelperActive ? activeColor : inactiveColor);
+        }
+        
+        // Update root indicator
+        if (ivRootIndicator != null) {
+            boolean hasRoot = RootUtils.isDeviceRooted() && RootUtils.hasRootAccess();
+            ivRootIndicator.setVisibility(hasRoot ? android.view.View.VISIBLE : android.view.View.GONE);
+        }
+    }_green_light);
         int inactiveColor = ContextCompat.getColor(this, android.R.color.darker_gray);
         int readyColor = ContextCompat.getColor(this, android.R.color.holo_blue_light);
         
