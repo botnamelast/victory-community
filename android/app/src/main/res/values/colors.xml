@@ -23,6 +23,30 @@
     <color name="text_tertiary">#888888</color>
     <color name="text_disabled">#555555</color>
     
+    <!-- Extended Icon Colors -->
+    <color name="icon_on_primary">#FFFFFF</color>
+    <color name="icon_on_secondary">#000000</color>
+    <color name="icon_on_surface">#FFFFFF</color>
+    <color name="icon_on_background">#FFFFFF</color>
+    <color name="icon_disabled">#666666</color>
+    <color name="icon_selected">#03DAC6</color>
+    
+    <!-- Scrim & Shadow Colors -->
+    <color name="scrim">#80000000</color>
+    <color name="shadow_light">#1A000000</color>
+    <color name="shadow_medium">#33000000</color>
+    <color name="shadow_dark">#4D000000</color>
+    
+    <!-- Additional Theme Colors -->
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_secondary">#000000</color>
+    <color name="on_surface">#FFFFFF</color>
+    <color name="on_background">#FFFFFF</color>
+    <color name="on_error">#FFFFFF</color>
+    <color name="inverse_surface">#FFFFFF</color>
+    <color name="inverse_on_surface">#000000</color>
+    <color name="inverse_primary">#1976D2</color>
+    
     <!-- Icon Colors -->
     <color name="icon_primary">#FFFFFF</color>
     <color name="icon_secondary">#B3B3B3</color>
@@ -63,7 +87,39 @@
     <color name="card_border">#555555</color>
     <color name="card_shadow">#1A000000</color>
     
-    <!-- Extended Text Colors -->
+    <!-- Extended Background Colors -->
+    <color name="background_surface">#2E2E2E</color>
+    <color name="background_variant">#3E3E3E</color>
+    <color name="background_elevated">#404040</color>
+    <color name="background_dialog">#2E2E2E</color>
+    <color name="background_overlay">#CC000000</color>
+    <color name="background_transparent">#00000000</color>
+    
+    <!-- Extended Surface Colors -->
+    <color name="surface_variant">#404040</color>
+    <color name="surface_elevated">#4E4E4E</color>
+    <color name="surface_container">#353535</color>
+    <color name="surface_container_high">#454545</color>
+    <color name="surface_container_highest">#555555</color>
+    <color name="surface_dim">#1A1A1A</color>
+    <color name="surface_bright">#4E4E4E</color>
+    
+    <!-- Border & Divider Colors -->
+    <color name="border_primary">#555555</color>
+    <color name="border_secondary">#3E3E3E</color>
+    <color name="divider">#2E2E2E</color>
+    <color name="divider_light">#404040</color>
+    <color name="outline">#666666</color>
+    <color name="outline_variant">#4E4E4E</color>
+    
+    <!-- State Colors -->
+    <color name="state_disabled">#555555</color>
+    <color name="state_pressed">#1A2196F3</color>
+    <color name="state_focused">#332196F3</color>
+    <color name="state_selected">#2196F3</color>
+    <color name="state_hover">#1A03DAC6</color>
+    
+    <!-- Extended Icon Colors -->
     <color name="text_headline">#FFFFFF</color>
     <color name="text_display">#FFFFFF</color>
     <color name="text_body_large">#E0E0E0</color>
