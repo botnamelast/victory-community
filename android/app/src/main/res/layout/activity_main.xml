@@ -46,7 +46,7 @@
             android:id="@+id/iv_root_indicator"
             android:layout_width="@dimen/icon_small"
             android:layout_height="@dimen/icon_small"
-            android:src="@drawable/root_mode_indicator"
+                                        android:src="@drawable/ic_root"
             android:contentDescription="@string/root_mode_description"
             android:visibility="gone"
             tools:visibility="visible" />
@@ -100,7 +100,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:src="@drawable/slide_button_track_bg"
+                            android:src="@drawable/ic_8ball"
                             android:scaleType="fitXY"
                             android:contentDescription="@string/slide_track_description" />
 
@@ -111,8 +111,8 @@
                             android:layout_height="match_parent"
                             android:max="100"
                             android:progress="0"
-                            android:thumb="@drawable/slide_thumb"
-                            android:progressDrawable="@drawable/slide_track"
+                            android:thumb="@drawable/ic_8ball"
+                            android:progressDrawable="@android:color/transparent"
                             android:background="@android:color/transparent"
                             android:splitTrack="false" />
 
@@ -168,7 +168,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/status_card_height"
                         android:orientation="horizontal"
-                        android:background="@drawable/status_bg_inactive"
+                        android:background="@color/surface_primary"
                         android:paddingHorizontal="@dimen/padding_standard"
                         android:gravity="center_vertical">
 
@@ -229,7 +229,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/status_card_height"
                         android:orientation="horizontal"
-                        android:background="@drawable/status_bg_inactive"
+                        android:background="@color/surface_primary"
                         android:paddingHorizontal="@dimen/padding_standard"
                         android:gravity="center_vertical">
 
@@ -289,7 +289,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/status_card_height"
                         android:orientation="horizontal"
-                        android:background="@drawable/status_bg_inactive"
+                        android:background="@color/surface_primary"
                         android:paddingHorizontal="@dimen/padding_standard"
                         android:gravity="center_vertical">
 
@@ -405,8 +405,8 @@
                             android:id="@+id/switch_root_mode"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:thumb="@drawable/slide_thumb"
-                            android:track="@drawable/slide_track" />
+                            android:thumb="@drawable/ic_8ball"
+                            android:track="@android:color/darker_gray" />
 
                     </LinearLayout>
 
