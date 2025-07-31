@@ -49,201 +49,187 @@
         </LinearLayout>
 
         <!-- Status Card -->
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:cardBackgroundColor="#161B22"
-            android:cardCornerRadius="12dp"
-            android:cardElevation="4dp">
+            android:background="#161B22"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:elevation="4dp">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="System Status"
+                android:textSize="18sp"
+                android:textColor="#F0F6FC"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status: Not Active"
+                android:textSize="16sp"
+                android:textColor="#7D88A1"
+                android:background="#21262D"
+                android:padding="15dp"
+                android:layout_marginBottom="15dp" />
+
+            <!-- Status Indicators -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="System Status"
-                    android:textSize="18sp"
-                    android:textColor="#F0F6FC"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="15dp" />
-
-                <TextView
-                    android:id="@+id/tv_status"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Status: Not Active"
-                    android:textSize="16sp"
-                    android:textColor="#7D88A1"
-                    android:background="#21262D"
-                    android:padding="15dp"
-                    android:layout_marginBottom="15dp" />
-
-                <!-- Status Indicators -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="vertical"
+                    android:gravity="center">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                    <View
+                        android:id="@+id/indicator_overlay"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="#FD7E14"
+                        android:layout_marginBottom="5dp" />
 
-                        <View
-                            android:id="@+id/indicator_overlay"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:background="#FD7E14"
-                            android:layout_marginBottom="5dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Overlay"
-                            android:textSize="12sp"
-                            android:textColor="#7D88A1" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                        <View
-                            android:id="@+id/indicator_permissions"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:background="#FD7E14"
-                            android:layout_marginBottom="5dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Permissions"
-                            android:textSize="12sp"
-                            android:textColor="#7D88A1" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center">
-
-                        <View
-                            android:id="@+id/indicator_root"
-                            android:layout_width="12dp"
-                            android:layout_height="12dp"
-                            android:background="#6F7681"
-                            android:layout_marginBottom="5dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Root"
-                            android:textSize="12sp"
-                            android:textColor="#7D88A1" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- Main Control Card -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:cardBackgroundColor="#161B22"
-            android:cardCornerRadius="12dp"
-            android:cardElevation="4dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Control Panel"
-                    android:textSize="18sp"
-                    android:textColor="#F0F6FC"
-                    android:textStyle="bold"
-                    android:layout_marginBottom="15dp" />
-
-                <!-- Main Toggle Button -->
-                <Button
-                    android:id="@+id/btn_toggle_overlay"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:text="Start System Helper"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:background="#238636"
-                    android:layout_marginBottom="15dp"
-                    android:elevation="2dp" />
-
-                <!-- Root Mode Toggle -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="#21262D"
-                    android:padding="15dp"
-                    android:gravity="center_vertical">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Root Mode"
-                            android:textSize="16sp"
-                            android:textColor="#F0F6FC"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Enhanced performance mode"
-                            android:textSize="12sp"
-                            android:textColor="#7D88A1" />
-
-                    </LinearLayout>
-
-                    <Switch
-                        android:id="@+id/switch_root_mode"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp" />
+                        android:text="Overlay"
+                        android:textSize="12sp"
+                        android:textColor="#7D88A1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <View
+                        android:id="@+id/indicator_permissions"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="#FD7E14"
+                        android:layout_marginBottom="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Permissions"
+                        android:textSize="12sp"
+                        android:textColor="#7D88A1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <View
+                        android:id="@+id/indicator_root"
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:background="#6F7681"
+                        android:layout_marginBottom="5dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Root"
+                        android:textSize="12sp"
+                        android:textColor="#7D88A1" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <!-- Main Control Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:background="#161B22"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:elevation="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Control Panel"
+                android:textSize="18sp"
+                android:textColor="#F0F6FC"
+                android:textStyle="bold"
+                android:layout_marginBottom="15dp" />
+
+            <!-- Main Toggle Button -->
+            <Button
+                android:id="@+id/btn_toggle_overlay"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Start System Helper"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:background="#238636"
+                android:layout_marginBottom="15dp"
+                android:elevation="2dp" />
+
+            <!-- Root Mode Toggle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#21262D"
+                android:padding="15dp"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Root Mode"
+                        android:textSize="16sp"
+                        android:textColor="#F0F6FC"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Enhanced performance mode"
+                        android:textSize="12sp"
+                        android:textColor="#7D88A1" />
+
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/switch_root_mode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <!-- Action Buttons -->
         <LinearLayout
